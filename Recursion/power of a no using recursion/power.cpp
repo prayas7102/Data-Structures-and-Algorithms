@@ -12,11 +12,9 @@ int power(int a,int b){
 	int ans=power(a,b/2);
 	// cout<<ans<<a<<b<<endl;
 	if(b%2==0){
-		cout<<"h"<<endl;
 		return ans*ans;
 	}
 	else{
-		cout<<"n"<<endl;
 		return a*ans*ans;
 	}
 }
