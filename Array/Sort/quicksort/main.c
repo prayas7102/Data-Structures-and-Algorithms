@@ -43,12 +43,12 @@ void Quicksort(int *a,int lb,int ub)
 }
 int main()
 {
-    int a[]={7,6,10,88,9,1,15,7},lb=0,ub=8;
+    int a[]={7,6,10,88,9,1,15,7},lb=0,ub=sizeof(a)/sizeof(a[0])-1;
     Quicksort(a,lb,ub);
 
 for(int i=0;i<8;i++)
     {
-        printf("%d\t",a[i]);
+        printf("%d ",a[i]);
     }
     return 0;
 }
