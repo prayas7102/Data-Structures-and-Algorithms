@@ -1,4 +1,8 @@
-5
-4
-2
-3 5 4 2 
+link list:
+10 2 4 5 3 9 
+link list reversed:
+9 3 5 4 2 10 
+link list reversed: using recursion
+10 2 4 5 3 9 
+link list k nodes reversed:
+5 4 2 10 9 3 

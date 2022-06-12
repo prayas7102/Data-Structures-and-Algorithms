@@ -44,30 +44,67 @@ void reverse(Node* &head){
 	}
 	head=prev;
 }
-Node* reverseRecursive(Node* &head){
+Node *temp;
+void reverseRecursive(Node* &head){
 	if (head==NULL||head->next==NULL)
 	{
-		return head;
+		temp=head;
+		return ;
 	}
-	Node* n=reverseRecursive(head->next);
+	reverseRecursive(head->next);
 	head->next->next=head;
-	cout<<head->data<<endl;
 	head->next=NULL;
-	return n;
+}
+Node* reversekNodes(Node* &head, int k){
+	Node* prev=NULL;
+	Node* current=head;
+	Node* nextptr;
+	int i=0;
+	while(current && i<k){
+		nextptr=current->next;
+		current->next=prev;
+		prev=current;
+		current=nextptr;
+		i++;
+	}
+	if(nextptr!=NULL){
+		head->next=reversekNodes(nextptr,k);
+	}
+	return prev;
 }
 int main()
 {
 	Node* head=NULL;
+
+// insert value in link list
+	cout<<"link list:"<<endl;
 	insertAtTail(head,4);
 	insertAtTail(head,5);
 	insertAtHead(head,2);
+	insertAtHead(head,10);
 	insertAtTail(head,3);
-	// print(head);
-	// cout<<endl;
-	// reverse(head);
-	// print(head);
-	head=reverseRecursive(head);
-	// cout<<endl;
+	insertAtTail(head,9);
 	print(head);
+
+	cout<<endl;
+// reverse linked list
+	cout<<"link list reversed:"<<endl;
+	reverse(head);
+	print(head);
+
+	cout<<endl;
+// reverse linked list using recursion
+	cout<<"link list reversed: using recursion"<<endl;
+	reverseRecursive(head);
+	head=temp;
+	print(head);
+
+	cout<<endl;
+// reverse k nodes in link list
+	cout<<"link list k nodes reversed:"<<endl;
+	int k=4;
+	head=reversekNodes(head,k);
+	print(head);
+
 	return 0;
 }
