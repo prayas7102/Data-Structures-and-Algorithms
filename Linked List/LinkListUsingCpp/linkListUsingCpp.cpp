@@ -1,7 +1,8 @@
 #include <iostream>
 using namespace std;
-struct Node
+class Node
 {
+public:
 	int data;
 	Node *next;
 	Node(int val)
@@ -134,6 +135,55 @@ Node *reversekNodes(Node *&head, int k)
 	}
 	return prev;
 }
+void insertCycle(Node *&head, int pos)
+{
+	Node *temp = head, *target = NULL;
+	int i = 0;
+	while (temp->next)
+	{
+		if (pos == i)
+		{
+			target = temp;
+		}
+		i++;
+		temp = temp->next;
+	}
+	temp->next = target;
+}
+Node *detectCycle(Node *&head)
+{
+	Node *slow = head, *fast = head;
+	do
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	} while (slow != fast);
+
+	fast = head;
+	while (slow != fast)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+	return slow;
+}
+Node *removeCycle(Node *&head)
+{
+	Node *slow = head, *fast = head;
+	do
+	{
+		slow = slow->next;
+		fast = fast->next->next;
+	} while (slow != fast);
+
+	fast = head;
+	while (slow->next != fast->next)
+	{
+		slow = slow->next;
+		fast = fast->next;
+	}
+	slow->next = NULL;
+}
 int main()
 {
 	Node *head = NULL;
@@ -171,6 +221,18 @@ int main()
 	cout << endl;
 	cout << "Linked List sorted" << endl;
 	head = MergeSort(head);
+	print(head);
+
+	cout << endl;
+	cout << "Inserting cycle in Linked List at position 3" << endl;
+	int pos = 3;
+	insertCycle(head, pos);
+	cout << "Detecting cycle in Linked List" << endl;
+	Node *loopPoint = detectCycle(head);
+	cout << "Cycle present in Linked List at node " << loopPoint->data << endl;
+
+	cout << "Remove cycle in Linked List" << endl;
+	removeCycle(head);
 	print(head);
 	return 0;
 }

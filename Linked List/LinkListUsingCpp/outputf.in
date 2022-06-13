@@ -8,3 +8,8 @@ link list k nodes reversed:
 5 4 2 10 9 3 
 Linked List sorted
 2 3 4 5 9 10 
+Inserting cycle in Linked List at position 3
+Detecting cycle in Linked List
+Cycle present in Linked List at node 5
+Remove cycle in Linked List
+2 3 4 5 9 10 
