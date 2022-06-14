@@ -15,3 +15,16 @@ Enter data to left of 4
 Enter Data
 Enter data to right of 4
 Enter Data
+
+level order traversal of tree
+2 
+3 
+4 
+5 
+
+inorder traversal of tree
+3 5 2 4 
+postorder traversal of tree
+5 3 4 2 
+preorder traversal of tree
+2 3 5 4 
