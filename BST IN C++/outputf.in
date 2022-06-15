@@ -18,8 +18,8 @@ Enter Data
 
 level order traversal of tree
 2 
-3o3 4 
-5o5 
+3 4 
+5 
 
 inorder traversal of tree
 3 5 2 4 
@@ -27,3 +27,25 @@ postorder traversal of tree
 5 3 4 2 
 preorder traversal of tree
 2 3 5 4 
+
+Build tree from level Order
+Enter value of root node
+Enter left node of 5
+Enter right node of 5
+Enter left node of 3
+Enter right node of 3
+Enter left node of 2
+Enter right node of 2
+Enter left node of 1
+Enter right node of 1
+Enter left node of 2
+Enter right node of 2
+Enter left node of 3
+Enter right node of 3
+Enter left node of 7
+Enter right node of 7
+
+level order traversal of tree
+5 
+3 2 
+1 2 3 7 

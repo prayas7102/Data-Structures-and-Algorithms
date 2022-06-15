@@ -53,7 +53,6 @@ void levelOrderTraversal(Node *root)
 			cout << endl;
 			if (container.empty() != 1)
 			{
-				cout << container.front()->val << "o";
 				container.push(NULL);
 			}
 		}
@@ -89,21 +88,66 @@ void postOrderTraversal(Node *root)
 	postOrderTraversal(root->right);
 	cout << root->val << " ";
 }
+void buildTreeFromLevelOrder(Node *&root)
+{
+	cout << "Enter value of root node" << endl;
+	int data;
+	cin >> data;
+	root = new Node(data);
+	queue<Node *> tree;
+	tree.push(root);
+	while (!tree.empty())
+	{
+		Node *node = tree.front();
+		tree.pop();
+		cout << "Enter left node of " << node->val << endl;
+		int left;
+		cin >> left;
+		if (left != -1)
+		{
+			node->left = new Node(left);
+			tree.push(node->left);
+		}
+		cout << "Enter right node of " << node->val << endl;
+		int right;
+		cin >> right;
+		if (right != -1)
+		{
+			node->right = new Node(right);
+			tree.push(node->right);
+		}
+	}
+}
 int main()
 {
 	Node *root = NULL;
 	root = buildTree(root);
+
 	cout << endl
 		 << "level order traversal of tree" << endl;
 	levelOrderTraversal(root);
+
 	cout << endl
 		 << "inorder traversal of tree" << endl;
 	inOrderTraversal(root);
+
 	cout << endl
 		 << "postorder traversal of tree" << endl;
 	postOrderTraversal(root);
+
 	cout << endl
 		 << "preorder traversal of tree" << endl;
 	preOrderTraversal(root);
+
+	cout << endl
+		 << endl
+		 << "Build tree from level Order" << endl;
+	Node *topRoot = NULL;
+	buildTreeFromLevelOrder(topRoot);
+
+	cout << endl
+		 << "level order traversal of tree" << endl;
+	levelOrderTraversal(topRoot);
+
 	return 0;
 }
