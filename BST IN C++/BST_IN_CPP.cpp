@@ -118,6 +118,18 @@ void buildTreeFromLevelOrder(Node *&root)
 		}
 	}
 }
+int height(Node *root)
+{
+	if (root == NULL)
+	{
+		return 0;
+	}
+	int left = height(root->left);
+	int right = height(root->right);
+	cout << right << left << endl;
+	int ans = max(left, right) + 1;
+	return ans;
+}
 int main()
 {
 	Node *root = NULL;
@@ -148,6 +160,10 @@ int main()
 	cout << endl
 		 << "level order traversal of tree" << endl;
 	levelOrderTraversal(topRoot);
+
+	cout << endl
+		 << "height of tree" << endl;
+	cout << height(topRoot);
 
 	return 0;
 }
