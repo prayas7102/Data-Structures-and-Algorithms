@@ -35,53 +35,75 @@ void levelOrderTraversal(Node *root)
 {
 	queue<Node *> container;
 	container.push(root);
-	while(!container.empty()){
-		Node *temp=container.front();
+	container.push(NULL);
+	while (!container.empty())
+	{
+		Node *temp = container.front();
 		container.pop();
-		cout<<temp->val<<" ";
-		if(temp->left)
-			container.push(temp->left);
-		if(temp->right)
-			container.push(temp->right);
-		cout<<endl;
+		if (temp)
+		{
+			cout << temp->val << " ";
+			if (temp->left)
+				container.push(temp->left);
+			if (temp->right)
+				container.push(temp->right);
+		}
+		else
+		{
+			cout << endl;
+			if (container.empty() != 1)
+			{
+				cout << container.front()->val << "o";
+				container.push(NULL);
+			}
+		}
 	}
 }
-void inOrderTraversal(Node *root){
-	if(!root){
+void inOrderTraversal(Node *root)
+{
+	if (!root)
+	{
 		return;
 	}
 	inOrderTraversal(root->left);
-	cout<<root->val<<" ";
+	cout << root->val << " ";
 	inOrderTraversal(root->right);
 }
-void preOrderTraversal(Node *root){
-	if(!root){
+void preOrderTraversal(Node *root)
+{
+	if (!root)
+	{
 		return;
 	}
-	cout<<root->val<<" ";
+	cout << root->val << " ";
 	preOrderTraversal(root->left);
 	preOrderTraversal(root->right);
 }
-void postOrderTraversal(Node *root){
-	if(!root){
+void postOrderTraversal(Node *root)
+{
+	if (!root)
+	{
 		return;
 	}
 	postOrderTraversal(root->left);
 	postOrderTraversal(root->right);
-	cout<<root->val<<" ";
-
+	cout << root->val << " ";
 }
 int main()
 {
 	Node *root = NULL;
 	root = buildTree(root);
-	cout<<endl<<"level order traversal of tree"<<endl;
+	cout << endl
+		 << "level order traversal of tree" << endl;
 	levelOrderTraversal(root);
-	cout<<endl<<"inorder traversal of tree"<<endl;
+	cout << endl
+		 << "inorder traversal of tree" << endl;
 	inOrderTraversal(root);
-	cout<<endl<<"postorder traversal of tree"<<endl;
+	cout << endl
+		 << "postorder traversal of tree" << endl;
 	postOrderTraversal(root);
-	cout<<endl<<"preorder traversal of tree"<<endl;
+	cout << endl
+		 << "preorder traversal of tree" << endl;
 	preOrderTraversal(root);
 	return 0;
 }
