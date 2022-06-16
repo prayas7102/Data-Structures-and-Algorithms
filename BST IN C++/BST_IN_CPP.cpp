@@ -126,10 +126,35 @@ int height(Node *root)
 	}
 	int left = height(root->left);
 	int right = height(root->right);
-	cout << right << left << endl;
 	int ans = max(left, right) + 1;
 	return ans;
 }
+bool isBalanced(Node *root){
+	if(root==NULL){
+		return true;
+	}
+	bool left=isBalanced(root->left);
+	bool right=isBalanced(root->right);
+	bool diff=abs(height(root->left)-height(root->right))<=1;
+	if(left && right && diff){
+		return true;
+	}
+	else{return false;}
+}
+pair<bool,int> isBalancedOptimised(Node *root){
+	if(!root){
+		pair<bool,int>init=make_pair(true,0);
+		return init;
+	}
+	pair<int,int> left=isBalancedOptimised(root->left);
+	pair<int,int> right=isBalancedOptimised(root->right);
+	bool diff=abs(left.second-right.second)<=1;
+	pair<bool,int> ans;
+	ans.first=diff && left.first && right.first;
+	ans.second=max(left.second,right.second)+1;
+	return ans;
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -162,8 +187,14 @@ int main()
 	levelOrderTraversal(topRoot);
 
 	cout << endl
-		 << "height of tree" << endl;
+		 << "height of tree" << " ";
 	cout << height(topRoot);
 
+	cout << endl <<endl<<"(O(n2) complexity) is the tree balanced? " ;
+	isBalanced(topRoot)?cout<<"true" :cout<<"false" ;
+
+	cout << endl <<endl<<"(O(n) complexity) is the tree balanced? " ;
+	isBalancedOptimised(root).first?cout<<"true" :cout<<"false" ;
+	
 	return 0;
 }
