@@ -126,6 +126,7 @@ int height(Node *root)
 	}
 	int left = height(root->left);
 	int right = height(root->right);
+	
 	int ans = max(left, right) + 1;
 	return ans;
 }
@@ -154,7 +155,23 @@ pair<bool,int> isBalancedOptimised(Node *root){
 	ans.second=max(left.second,right.second)+1;
 	return ans;
 }
-
+pair<int,int> diameter(Node* root){
+        if(!root){
+            pair<int,int> p=make_pair(0,0);
+            return p;
+        }
+        pair<int,int> left=diameter(root->left);
+        pair<int,int> right=diameter(root->right);
+        
+        int height=left.second+right.second+1;
+        
+        pair<int,int> ans;
+        
+        ans.first=max(left.first,max(right.first,height));
+        ans.second=max(left.second, right.second) +1;
+        
+        return ans;
+ }
 int main()
 {
 	Node *root = NULL;
@@ -196,5 +213,7 @@ int main()
 	cout << endl <<endl<<"(O(n) complexity) is the tree balanced? " ;
 	isBalancedOptimised(root).first?cout<<"true" :cout<<"false" ;
 	
+	cout << endl <<endl<<"(O(n) complexity) diameter of tree "<<diameter(root).first-1;
 	return 0;
 }
+
