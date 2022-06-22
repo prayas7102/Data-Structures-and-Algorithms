@@ -50,4 +50,6 @@ height of tree 3
 
 (O(n) complexity) is the tree balanced? true
 
-(O(n) complexity) diameter of tree 3
+(O(n2) complexity) diameter of tree 4
+
+(O(n) complexity) diameter of tree 4
