@@ -53,3 +53,6 @@ height of tree 3
 (O(n2) complexity) diameter of tree 4
 
 (O(n) complexity) diameter of tree 4
+
+zig zag level order traversal of tree
+2 4 3 5 

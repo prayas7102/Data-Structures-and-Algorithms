@@ -15,6 +15,7 @@ public:
 		this->right = NULL;
 	}
 };
+
 Node *buildTree(Node *root)
 {
 	cout << "Enter Data" << endl;
@@ -31,6 +32,7 @@ Node *buildTree(Node *root)
 	root->right = buildTree(root->right);
 	return root;
 }
+
 void levelOrderTraversal(Node *root)
 {
 	queue<Node *> container;
@@ -58,6 +60,7 @@ void levelOrderTraversal(Node *root)
 		}
 	}
 }
+
 void inOrderTraversal(Node *root)
 {
 	if (!root)
@@ -68,6 +71,7 @@ void inOrderTraversal(Node *root)
 	cout << root->val << " ";
 	inOrderTraversal(root->right);
 }
+
 void preOrderTraversal(Node *root)
 {
 	if (!root)
@@ -78,6 +82,7 @@ void preOrderTraversal(Node *root)
 	preOrderTraversal(root->left);
 	preOrderTraversal(root->right);
 }
+
 void postOrderTraversal(Node *root)
 {
 	if (!root)
@@ -88,6 +93,7 @@ void postOrderTraversal(Node *root)
 	postOrderTraversal(root->right);
 	cout << root->val << " ";
 }
+
 void buildTreeFromLevelOrder(Node *&root)
 {
 	cout << "Enter value of root node" << endl;
@@ -118,6 +124,7 @@ void buildTreeFromLevelOrder(Node *&root)
 		}
 	}
 }
+
 int height(Node *root)
 {
 	if (root == NULL)
@@ -126,61 +133,115 @@ int height(Node *root)
 	}
 	int left = height(root->left);
 	int right = height(root->right);
-	
+
 	int ans = max(left, right) + 1;
 	return ans;
 }
-bool isBalanced(Node *root){
-	if(root==NULL){
+
+bool isBalanced(Node *root)
+{
+	if (root == NULL)
+	{
 		return true;
 	}
-	bool left=isBalanced(root->left);
-	bool right=isBalanced(root->right);
-	bool diff=abs(height(root->left)-height(root->right))<=1;
-	if(left && right && diff){
+	bool left = isBalanced(root->left);
+	bool right = isBalanced(root->right);
+	bool diff = abs(height(root->left) - height(root->right)) <= 1;
+	if (left && right && diff)
+	{
 		return true;
 	}
-	else{return false;}
+	else
+	{
+		return false;
+	}
 }
-pair<bool,int> isBalancedOptimised(Node *root){
-	if(!root){
-		pair<bool,int>init=make_pair(true,0);
+pair<bool, int> isBalancedOptimised(Node *root)
+{
+	if (!root)
+	{
+		pair<bool, int> init = make_pair(true, 0);
 		return init;
 	}
-	pair<int,int> left=isBalancedOptimised(root->left);
-	pair<int,int> right=isBalancedOptimised(root->right);
-	bool diff=abs(left.second-right.second)<=1;
-	pair<bool,int> ans;
-	ans.first=diff && left.first && right.first;
-	ans.second=max(left.second,right.second)+1;
+	pair<int, int> left = isBalancedOptimised(root->left);
+	pair<int, int> right = isBalancedOptimised(root->right);
+	bool diff = abs(left.second - right.second) <= 1;
+	pair<bool, int> ans;
+	ans.first = diff && left.first && right.first;
+	ans.second = max(left.second, right.second) + 1;
 	return ans;
 }
-pair<int,int> diameterOptimised(Node* root){
-        if(!root){
-            pair<int,int> p=make_pair(0,0);
-            return p;
-        }
-        pair<int,int> left=diameterOptimised(root->left);
-        pair<int,int> right=diameterOptimised(root->right);
-        
-        int height=left.second+right.second+1;
-        
-        pair<int,int> ans;
-        
-        ans.first=max(left.first,max(right.first,height));
-        ans.second=max(left.second, right.second) +1;
-        
-        return ans;
- }
- int diameter(Node *root){
- 	if(!root){
- 		return 0;
- 	}
- 	int left=diameter(root->left);
- 	int right=diameter(root->right);
- 	int heightOfNode=height(root->left)+height(root->right)+1;
- 	return max(left,max(right,heightOfNode));
- }
+
+pair<int, int> diameterOptimised(Node *root)
+{
+	if (!root)
+	{
+		pair<int, int> p = make_pair(0, 0);
+		return p;
+	}
+	pair<int, int> left = diameterOptimised(root->left);
+	pair<int, int> right = diameterOptimised(root->right);
+
+	int height = left.second + right.second + 1;
+
+	pair<int, int> ans;
+
+	ans.first = max(left.first, max(right.first, height));
+	ans.second = max(left.second, right.second) + 1;
+
+	return ans;
+}
+
+int diameter(Node *root)
+{
+	if (!root)
+	{
+		return 0;
+	}
+	int left = diameter(root->left);
+	int right = diameter(root->right);
+	int heightOfNode = height(root->left) + height(root->right) + 1;
+	return max(left, max(right, heightOfNode));
+}
+
+vector<int> zigzagLevelOrderTraversal(Node *root)
+{
+	queue<Node *> Queue;
+	vector<int> result;
+	if (!root)
+	{
+		return result;
+	}
+	Queue.push(root);
+	bool direction = true;
+	while (!Queue.empty())
+	{
+		int size = Queue.size();
+		vector<int> ans(size);
+		for (int i = 0; i < size; ++i)
+		{
+			int index = direction ? i : size - i - 1;
+			ans[index] = Queue.front()->val;
+			Node *front = Queue.front();
+			Queue.pop();
+			if (front->left)
+			{
+				Queue.push(front->left);
+			}
+			if (front->right)
+			{
+				Queue.push(front->right);
+			}
+		}
+		for (auto i : ans)
+		{
+			result.push_back(i);
+		}
+		direction = !direction;
+	}
+	return result;
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -213,18 +274,34 @@ int main()
 	levelOrderTraversal(topRoot);
 
 	cout << endl
-		 << "height of tree" << " ";
+		 << "height of tree"
+		 << " ";
 	cout << height(topRoot);
 
-	cout << endl <<endl<<"(O(n2) complexity) is the tree balanced? " ;
-	isBalanced(topRoot)?cout<<"true" :cout<<"false" ;
+	cout << endl
+		 << endl
+		 << "(O(n2) complexity) is the tree balanced? ";
+	isBalanced(topRoot) ? cout << "true" : cout << "false";
 
-	cout << endl <<endl<<"(O(n) complexity) is the tree balanced? " ;
-	isBalancedOptimised(root).first?cout<<"true" :cout<<"false" ;
-	
-	cout << endl <<endl<<"(O(n2) complexity) diameter of tree "<<diameter(root);
-	cout << endl <<endl<<"(O(n) complexity) diameter of tree "<<diameterOptimised(root).first;
-	
+	cout << endl
+		 << endl
+		 << "(O(n) complexity) is the tree balanced? ";
+	isBalancedOptimised(root).first ? cout << "true" : cout << "false";
+
+	cout << endl
+		 << endl
+		 << "(O(n2) complexity) diameter of tree " << diameter(root);
+	cout << endl
+		 << endl
+		 << "(O(n) complexity) diameter of tree " << diameterOptimised(root).first;
+
+	cout << endl
+		 << endl
+		 << "zig zag level order traversal of tree" << endl;
+	vector<int> zigZag = zigzagLevelOrderTraversal(root);
+	for (auto i : zigZag)
+	{
+		cout << i << " ";
+	}
 	return 0;
 }
-
