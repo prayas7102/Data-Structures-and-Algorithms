@@ -56,3 +56,9 @@ height of tree 3
 
 zig zag level order traversal of tree
 2 4 3 5 
+
+boundary of binary tree
+
+
+flattening of binary tree to linked list
+2 3 5 4 
