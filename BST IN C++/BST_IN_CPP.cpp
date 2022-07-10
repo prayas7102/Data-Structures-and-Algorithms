@@ -242,22 +242,29 @@ vector<int> zigzagLevelOrderTraversal(Node *root)
 	return result;
 }
 
-void flatten(Node* root) {
-        if(!root){return;}
-        Node *curr=root;
-        while(curr){
-            if(curr->left){
-                Node *pred=curr->left;
-                while(pred->right){
-                    pred=pred->right;
-                }
-                pred->right=curr->right;
-                curr->right=curr->left;
-                curr->left=NULL;
-            }
-            curr=curr->right;
-        }
-    }
+void flatten(Node *root)
+{
+	if (!root)
+	{
+		return;
+	}
+	Node *curr = root;
+	while (curr)
+	{
+		if (curr->left)
+		{
+			Node *pred = curr->left;
+			while (pred->right)
+			{
+				pred = pred->right;
+			}
+			pred->right = curr->right;
+			curr->right = curr->left;
+			curr->left = NULL;
+		}
+		curr = curr->right;
+	}
+}
 
 int main()
 {
@@ -328,9 +335,10 @@ int main()
 		 << endl
 		 << "flattening of binary tree to linked list" << endl;
 	flatten(root);
-	while(root){
-		cout<< root->val<< " ";
-		root=root->right;
+	while (root)
+	{
+		cout << root->val << " ";
+		root = root->right;
 	}
 	return 0;
 }
