@@ -1,7 +1,7 @@
 # Data-Structures-and-Algorithms-
 DSA algorithms by Prayas kumar. Code in CPP for Stack, Queue, Graph, Linked List, Tree etc.
 
-# To clone the project, give this command: git clone https://github.com/prayas7102/Data-Structures-and-Algorithms-.git
+## 🚀 To clone the project, give this command: git clone https://github.com/prayas7102/Data-Structures-and-Algorithms-.git
 
 Make sure to posses a C++ compiler in your system. 
 Preferably use Sublime Text as Code Editor.
