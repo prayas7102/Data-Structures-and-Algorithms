@@ -266,6 +266,10 @@ void flatten(Node *root)
 	}
 }
 
+void morrisTraversal(Node *root){
+	
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -340,5 +344,16 @@ int main()
 		cout << root->val << " ";
 		root = root->right;
 	}
+
+	cout << endl
+		 << endl
+		 << "flattening of binary tree to linked list" << endl;
+	morrisTraversal(root);
+	while (root)
+	{
+		cout << root->val << " ";
+		root = root->right;
+	}
+
 	return 0;
 }
