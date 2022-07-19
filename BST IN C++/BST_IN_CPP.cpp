@@ -266,8 +266,8 @@ void flatten(Node *root)
 	}
 }
 
-void morrisTraversal(Node *root){
-	
+void morrisTraversal(Node *root)
+{
 }
 
 int main()

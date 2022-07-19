@@ -6,27 +6,28 @@ using namespace std;
 
 class Graph
 {
-	int V; 
-	vector<list<int>> adj;
+	int V;
+	unordered_map<int,list<int>> adj;
+	unordered_map<int, bool> visited;
 public:
 	Graph(int V); // Constructor
 
 	// function to add an edge to graph
 	void addEdge(int v, int w);
-// prints adjancey list
+
+	// prints adjancey list
 	void printAdjList();
+
 	// prints BFS traversal from a given source s
 	void BFS(int s);
 
-// prints BFS traversal from a given source s
+	// prints BFS traversal from a given source s
 	void DFS(int s);
-
 };
 
 Graph::Graph(int V)
 {
 	this->V = V;
-	adj.resize(V);
 }
 
 void Graph::addEdge(int v, int w)
@@ -34,24 +35,22 @@ void Graph::addEdge(int v, int w)
 	adj[v].push_back(w); // Add w to v’s list.
 }
 
-void Graph::printAdjList(){
-	int pos=0;
-	cout<<"Adjancey List"<<endl;
-	for(auto i: adj){
-		if(i.size()){
-			cout<<pos<<"--> ";
-			for(auto j:i){
-				cout<<j<< " ";
-			}
+void Graph::printAdjList()
+{
+	int pos = 0;
+	cout << "Adjancey List" << endl;
+	for (auto i : adj)
+	{
+		cout<<i.first<<"--> ";
+		for(auto j:i.second){
+			cout<<j<<" ";
 		}
 		cout<<endl;
-		pos++;
 	}
 }
+
 void Graph::BFS(int s)
 {
-	vector<bool> visited;
-	visited.resize(V,false);
 
 	// Create a queue for BFS
 	list<int> queue;
@@ -59,13 +58,13 @@ void Graph::BFS(int s)
 	visited[s] = true;
 	queue.push_back(s);
 
-	while(!queue.empty())
+	while (!queue.empty())
 	{
 		s = queue.front();
 		cout << s << " ";
 		queue.pop_front();
 
-		for (auto adjacent: adj[s])
+		for (auto adjacent : adj[s])
 		{
 			if (!visited[adjacent])
 			{
@@ -74,6 +73,16 @@ void Graph::BFS(int s)
 			}
 		}
 	}
+}
+
+void Graph::DFS(int v)
+{
+	visited[v] = true;
+	cout << v << " ";
+	list<int>::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            DFS(*i);
 }
 
 int main()
@@ -87,10 +96,13 @@ int main()
 	g.addEdge(3, 3);
 
 	g.printAdjList();
-	cout<<endl;
+	cout << endl;
 	cout << "Following is Breadth First Traversal "
-		<< "(starting from vertex 2) \n";
+		 << "(starting from vertex 2) \n";
 	g.BFS(2);
-
+	cout << endl;
+	cout << "Following is Depth First Traversal "
+		 << "(starting from vertex 2) \n";
+	g.DFS(2);
 	return 0;
 }
