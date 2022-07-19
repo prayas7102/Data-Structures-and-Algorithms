@@ -6,5 +6,6 @@ Adjancey List
 
 Following is Breadth First Traversal (starting from vertex 2) 
 2 0 3 1 
+
 Following is Depth First Traversal (starting from vertex 2) 
-2 
+2 0 1 3 

@@ -7,8 +7,9 @@ using namespace std;
 class Graph
 {
 	int V;
-	unordered_map<int,list<int>> adj;
+	unordered_map<int, list<int>> adj;
 	unordered_map<int, bool> visited;
+
 public:
 	Graph(int V); // Constructor
 
@@ -32,7 +33,7 @@ Graph::Graph(int V)
 
 void Graph::addEdge(int v, int w)
 {
-	adj[v].push_back(w); // Add w to v’s list.
+	adj[v].push_back(w);
 }
 
 void Graph::printAdjList()
@@ -41,11 +42,12 @@ void Graph::printAdjList()
 	cout << "Adjancey List" << endl;
 	for (auto i : adj)
 	{
-		cout<<i.first<<"--> ";
-		for(auto j:i.second){
-			cout<<j<<" ";
+		cout << i.first << "--> ";
+		for (auto j : i.second)
+		{
+			cout << j << " ";
 		}
-		cout<<endl;
+		cout << endl;
 	}
 }
 
@@ -53,26 +55,28 @@ void Graph::BFS(int s)
 {
 
 	// Create a queue for BFS
-	list<int> queue;
+	queue<int> queue;
 
 	visited[s] = true;
-	queue.push_back(s);
+	queue.push(s);
 
 	while (!queue.empty())
 	{
 		s = queue.front();
 		cout << s << " ";
-		queue.pop_front();
+		queue.pop();
 
 		for (auto adjacent : adj[s])
 		{
 			if (!visited[adjacent])
 			{
 				visited[adjacent] = true;
-				queue.push_back(adjacent);
+				queue.push(adjacent);
 			}
 		}
 	}
+	// make visited array empty for dfs
+	visited.clear();
 }
 
 void Graph::DFS(int v)
@@ -80,9 +84,9 @@ void Graph::DFS(int v)
 	visited[v] = true;
 	cout << v << " ";
 	list<int>::iterator i;
-    for (i = adj[v].begin(); i != adj[v].end(); ++i)
-        if (!visited[*i])
-            DFS(*i);
+	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+		if (!visited[*i])
+			DFS(*i);
 }
 
 int main()
@@ -100,9 +104,15 @@ int main()
 	cout << "Following is Breadth First Traversal "
 		 << "(starting from vertex 2) \n";
 	g.BFS(2);
-	cout << endl;
+	cout << endl << endl;
 	cout << "Following is Depth First Traversal "
 		 << "(starting from vertex 2) \n";
 	g.DFS(2);
 	return 0;
 }
+
+// 0------1
+// |  ----'
+// | /
+// |/
+// 2------3
