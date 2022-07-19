@@ -13,9 +13,14 @@ public:
 
 	// function to add an edge to graph
 	void addEdge(int v, int w);
-
+// prints adjancey list
+	void printAdjList();
 	// prints BFS traversal from a given source s
 	void BFS(int s);
+
+// prints BFS traversal from a given source s
+	void DFS(int s);
+
 };
 
 Graph::Graph(int V)
@@ -29,6 +34,20 @@ void Graph::addEdge(int v, int w)
 	adj[v].push_back(w); // Add w to v’s list.
 }
 
+void Graph::printAdjList(){
+	int pos=0;
+	cout<<"Adjancey List"<<endl;
+	for(auto i: adj){
+		if(i.size()){
+			cout<<pos<<"--> ";
+			for(auto j:i){
+				cout<<j<< " ";
+			}
+		}
+		cout<<endl;
+		pos++;
+	}
+}
 void Graph::BFS(int s)
 {
 	vector<bool> visited;
@@ -46,12 +65,12 @@ void Graph::BFS(int s)
 		cout << s << " ";
 		queue.pop_front();
 
-		for (auto adjecent: adj[s])
+		for (auto adjacent: adj[s])
 		{
-			if (!visited[adjecent])
+			if (!visited[adjacent])
 			{
-				visited[adjecent] = true;
-				queue.push_back(adjecent);
+				visited[adjacent] = true;
+				queue.push_back(adjacent);
 			}
 		}
 	}
@@ -67,6 +86,8 @@ int main()
 	g.addEdge(2, 3);
 	g.addEdge(3, 3);
 
+	g.printAdjList();
+	cout<<endl;
 	cout << "Following is Breadth First Traversal "
 		<< "(starting from vertex 2) \n";
 	g.BFS(2);
