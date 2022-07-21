@@ -1,0 +1,10 @@
+Available Stack
+ 8 9 8 12 20 2
+
+Deleting middle element
+ 8 9 8 20 2
+
+Adding element 30 at bottom of stack
+ 8 9 8 20 2 30
+
+Unbalanced
