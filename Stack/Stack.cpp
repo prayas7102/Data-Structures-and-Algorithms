@@ -16,6 +16,14 @@ void deleteMiddleElement(stack<int> &s, int count, int size)
 	s.push(num);
 }
 
+void printVector(vector<int> v)
+{
+	for (auto i : v)
+	{
+		cout << i << " ";
+	}
+}
+
 void addBottomElement(stack<int> &s, int x)
 {
 	if (s.empty())
@@ -50,6 +58,8 @@ int checkBalancedParanthesis(vector<char> v)
 		}
 		else
 		{
+			if (p.empty())
+				return false;
 			int top = p.top();
 			if ((top == '{' && ch == '}') || (top == '(' && ch == ')') || (top == '[' && ch == ']'))
 			{
@@ -69,24 +79,83 @@ int checkBalancedParanthesis(vector<char> v)
 	return true;
 }
 
-vector<int> nextSmallerElement(vector<int> v)
+vector<int> nextOrPrevSmallerElement(vector<int> v, bool next)
 {
 	stack<int> s;
 	s.push(-1);
 	int n = v.size();
-	vector<int> a(n);
-	for (int i = n - 1; i >= 0; i--)
+	vector<int> ans(n);
+	if (!next)
 	{
-		int curr = v[i];
-		while (s.top() >= curr)
+		for (int i = n - 1; i >= 0; i--)
 		{
-			cout << s.top() << "\n";
-			s.pop();
+			int curr = v[i];
+			while (s.top() >= curr)
+			{
+				s.pop();
+			}
+			ans[i] = s.top();
+			s.push(curr);
 		}
-		a[i] = s.top();
-		s.push(curr);
 	}
-	return a;
+	else
+	{
+		for (int i = 0; i < n; i++)
+		{
+			int curr = v[i];
+			while (s.top() >= curr)
+			{
+				s.pop();
+			}
+			ans[i] = s.top();
+			s.push(curr);
+		}
+	}
+	return ans;
+}
+
+vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next){
+	stack<int> s;
+	s.push(-1);
+	int n = v.size();
+	vector<int> ans(n);
+	if (!next)
+	{
+		for (int i = n - 1; i >= 0; i--)
+		{
+			int curr = v[i];
+			while (s.top()!=-1 && v[s.top()] >= curr)
+			{
+				s.pop();
+			}
+			ans[i] = s.top();
+			s.push(i);
+		}
+	}
+	else{
+		for (int i = 0; i < n; i++)
+		{
+			int curr = v[i];
+			while (s.top()!=-1 && v[s.top()] >= curr)
+			{
+				s.pop();
+			}
+			ans[i] = s.top();
+			s.push(i);
+		}
+	}
+	return ans;
+}
+int largestAreaRectangle(vector<int> length){
+	vector<int> next=nextOrPrevSmallerElementHistogram(length,true),prev=nextOrPrevSmallerElementHistogram(length,false);
+	int area=-99999;
+	int n=length.size();
+	for (int i = 0; i < length.size(); ++i)
+	{
+		if(next[i]!=-1) area=max(area,length[i]*(next[i]-prev[i]-1));
+		else area=max(area,length[i]*(n-prev[i]-1));
+	}
+	return area;
 }
 
 int main()
@@ -113,7 +182,7 @@ int main()
 	addBottomElement(s, x);
 	printStack(s);
 
-	vector<char> vect{'{', '(', ')', '('};
+	vector<char> vect{'{', '(', ')', '}', '}'};
 	cout << "\n\n";
 	checkBalancedParanthesis(vect) ? cout << "Balanced" : cout << "Unbalanced";
 
@@ -121,16 +190,18 @@ int main()
 	cout << "\n\n";
 	cout << "Find next smaller element in ";
 	cout << "\n\n";
-	for (auto i : v)
-	{
-		cout << i << " ";
-	}
+	printVector(v);
 	cout << "\n\n";
+	v = nextOrPrevSmallerElement(v, false); // previous smaller element
+	// for next smaller element call nextOrPrevSmallerElement(v,true)
+	printVector(v);
 
-	v = nextSmallerElement(v);
-	for (auto i : v)
-	{
-		cout << i << " ";
-	}
+	cout << "\n\n";
+	cout << "Largest rectangle in histogram ";
+	cout << "\n\n";
+	vector<int> length{40, 78, 20, 80};
+	printVector(length);
+		cout << "\n\n=";
+	cout<<largestAreaRectangle(length);
 	return 0;
 }
