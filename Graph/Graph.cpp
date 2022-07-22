@@ -104,7 +104,8 @@ int main()
 	cout << "Following is Breadth First Traversal "
 		 << "(starting from vertex 2) \n";
 	g.BFS(2);
-	cout << endl << endl;
+	cout << endl
+		 << endl;
 	cout << "Following is Depth First Traversal "
 		 << "(starting from vertex 2) \n";
 	g.DFS(2);

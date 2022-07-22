@@ -8,3 +8,13 @@ Adding element 30 at bottom of stack
  8 9 8 20 2 30
 
 Unbalanced
+
+Find next smaller element in 
+
+6 2 3 7 8 3 
+
+8
+7
+3
+3
+2 -1 -1 3 3 -1 
