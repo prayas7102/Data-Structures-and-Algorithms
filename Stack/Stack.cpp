@@ -82,19 +82,20 @@ int checkBalancedParanthesis(vector<char> v)
 vector<int> nextOrPrevSmallerElement(vector<int> v, bool next)
 {
 	stack<int> s;
-	s.push(-1);
 	int n = v.size();
 	vector<int> ans(n);
+
 	if (!next)
 	{
 		for (int i = n - 1; i >= 0; i--)
 		{
 			int curr = v[i];
-			while (s.top() >= curr)
+			while (!s.empty() && s.top() >= v[i])
 			{
 				s.pop();
 			}
-			ans[i] = s.top();
+			int res = s.empty() ? -1 : s.top();
+			ans[i] = res;
 			s.push(curr);
 		}
 	}
@@ -103,18 +104,20 @@ vector<int> nextOrPrevSmallerElement(vector<int> v, bool next)
 		for (int i = 0; i < n; i++)
 		{
 			int curr = v[i];
-			while (s.top() >= curr)
+			while (!s.empty() && s.top() >= v[i])
 			{
 				s.pop();
 			}
-			ans[i] = s.top();
+			int res = s.empty() ? -1 : s.top();
+			ans[i] = res;
 			s.push(curr);
 		}
 	}
 	return ans;
 }
 
-vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next){
+vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next)
+{
 	stack<int> s;
 	s.push(-1);
 	int n = v.size();
@@ -124,7 +127,7 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next){
 		for (int i = n - 1; i >= 0; i--)
 		{
 			int curr = v[i];
-			while (s.top()!=-1 && v[s.top()] >= curr)
+			while (s.top() != -1 && v[s.top()] >= curr)
 			{
 				s.pop();
 			}
@@ -132,11 +135,12 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next){
 			s.push(i);
 		}
 	}
-	else{
+	else
+	{
 		for (int i = 0; i < n; i++)
 		{
 			int curr = v[i];
-			while (s.top()!=-1 && v[s.top()] >= curr)
+			while (s.top() != -1 && v[s.top()] >= curr)
 			{
 				s.pop();
 			}
@@ -146,14 +150,18 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next){
 	}
 	return ans;
 }
-int largestAreaRectangle(vector<int> length){
-	vector<int> next=nextOrPrevSmallerElementHistogram(length,true),prev=nextOrPrevSmallerElementHistogram(length,false);
-	int area=-99999;
-	int n=length.size();
+int largestAreaRectangle(vector<int> length)
+{
+	vector<int> next = nextOrPrevSmallerElementHistogram(length, true), prev = nextOrPrevSmallerElementHistogram(length, false);
+	int area = -99999;
+	int n = length.size();
 	for (int i = 0; i < length.size(); ++i)
 	{
-		if(next[i]!=-1) area=max(area,length[i]*(next[i]-prev[i]-1));
-		else area=max(area,length[i]*(n-prev[i]-1));
+		if (next[i] != -1)
+			area = max(area, length[i] * (next[i] - prev[i] - 1));
+		else
+			area = max(area, length[i] * (n - prev[i] - 1));
+		// cout<<next[i]<<prev[i]<<endl;
 	}
 	return area;
 }
@@ -192,16 +200,20 @@ int main()
 	cout << "\n\n";
 	printVector(v);
 	cout << "\n\n";
-	v = nextOrPrevSmallerElement(v, false); // previous smaller element
-	// for next smaller element call nextOrPrevSmallerElement(v,true)
+
+	// for next smaller element call nextOrPrevSmallerElement(v,false)
+	// for next previous element call nextOrPrevSmallerElement(v,true)
+
+	v = nextOrPrevSmallerElement(v, 1);
+
 	printVector(v);
 
 	cout << "\n\n";
 	cout << "Largest rectangle in histogram ";
 	cout << "\n\n";
-	vector<int> length{40, 78, 20, 80};
+	vector<int> length{2, 1, 5, 6, 2, 3};
 	printVector(length);
-		cout << "\n\n=";
-	cout<<largestAreaRectangle(length);
+	cout << "= ";
+	cout << largestAreaRectangle(length);
 	return 0;
 }
