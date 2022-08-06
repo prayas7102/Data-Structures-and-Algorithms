@@ -122,7 +122,7 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next)
 	s.push(-1);
 	int n = v.size();
 	vector<int> ans(n);
-	if (!next)
+	if (next)
 	{
 		for (int i = n - 1; i >= 0; i--)
 		{
@@ -152,16 +152,17 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next)
 }
 int largestAreaRectangle(vector<int> length)
 {
-	vector<int> next = nextOrPrevSmallerElementHistogram(length, true), prev = nextOrPrevSmallerElementHistogram(length, false);
-	int area = -99999;
+	vector<int> next = nextOrPrevSmallerElementHistogram(length, true);
+	vector<int> prev = nextOrPrevSmallerElementHistogram(length, false);
+	int area = -99999999;
 	int n = length.size();
-	for (int i = 0; i < length.size(); ++i)
+	for (int i = 0; i < length.size(); i++)
 	{
-		if (next[i] != -1)
-			area = max(area, length[i] * (next[i] - prev[i] - 1));
-		else
-			area = max(area, length[i] * (n - prev[i] - 1));
-		// cout<<next[i]<<prev[i]<<endl;
+		int l = length[i];
+		if (next[i] == -1)
+			next[i] = n;
+		int b = next[i] - prev[i] - 1;
+		area = max(area, l * b);
 	}
 	return area;
 }
@@ -204,7 +205,7 @@ int main()
 	// for next smaller element call nextOrPrevSmallerElement(v,false)
 	// for next previous element call nextOrPrevSmallerElement(v,true)
 
-	v = nextOrPrevSmallerElement(v, 1);
+	v = nextOrPrevSmallerElement(v, false);
 
 	printVector(v);
 
