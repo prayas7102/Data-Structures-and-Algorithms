@@ -22,6 +22,7 @@ void printVector(vector<int> v)
 	{
 		cout << i << " ";
 	}
+	cout<<"\n\n";
 }
 
 void addBottomElement(stack<int> &s, int x)
@@ -150,6 +151,7 @@ vector<int> nextOrPrevSmallerElementHistogram(vector<int> v, int next)
 	}
 	return ans;
 }
+
 int largestAreaRectangle(vector<int> length)
 {
 	vector<int> next = nextOrPrevSmallerElementHistogram(length, true);
@@ -163,6 +165,21 @@ int largestAreaRectangle(vector<int> length)
 			next[i] = n;
 		int b = next[i] - prev[i] - 1;
 		area = max(area, l * b);
+	}
+	return area;
+}
+
+int largestAreaRectangle2DArray(vector<vector<int>> v, int n, int m){
+	int area=largestAreaRectangle(v[0]);
+	for (int i = 1; i < n; ++i)
+	{
+		for (int j = 0; j < m; ++j)
+		{
+			if(v[i][j]!=0){
+				v[i][j]=v[i][j]+v[i-1][j];
+			}
+		}
+		area=max(largestAreaRectangle(v[i]),area);
 	}
 	return area;
 }
@@ -200,7 +217,6 @@ int main()
 	cout << "Find next smaller element in ";
 	cout << "\n\n";
 	printVector(v);
-	cout << "\n\n";
 
 	// for next smaller element call nextOrPrevSmallerElement(v,false)
 	// for next previous element call nextOrPrevSmallerElement(v,true)
@@ -209,12 +225,22 @@ int main()
 
 	printVector(v);
 
-	cout << "\n\n";
 	cout << "Largest rectangle in histogram ";
 	cout << "\n\n";
 	vector<int> length{2, 1, 5, 6, 2, 3};
 	printVector(length);
 	cout << "= ";
 	cout << largestAreaRectangle(length);
+
+	cout << "\n\n" <<"Largest rectangle in 2-D array = ";
+	vector<vector<int>> rectangleArr {
+        {1, 0, 1},
+        {1, 1, 1},
+        {1, 1, 0}
+    };
+    int n=3,m=3;
+	cout << largestAreaRectangle2DArray(rectangleArr,n,m);
 	return 0;
+
+
 }
