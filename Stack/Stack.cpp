@@ -184,42 +184,53 @@ int largestAreaRectangle2DArray(vector<vector<int>> v, int n, int m)
 		area = max(largestAreaRectangle(v[i]), area);
 	}
 	return area;
-}
+} 
 
-int celebrityProblem(vector<vector<int>> v, int n=3, int m=3){
+int celebrityProblem(vector<vector<int>> v, int n = 3, int m = 3)
+{
 	stack<int> s;
 	for (int i = 0; i < n; ++i)
 	{
 		s.push(i);
 	}
-	while(s.size()>1){
-		int a=s.top();
+	while (s.size() > 1)
+	{
+		int a = s.top();
 		s.pop();
-		int b=s.top();
+		int b = s.top();
 		s.pop();
-		if(v[a][b]){
+		if (v[a][b])
+		{
 			s.push(b);
 		}
 		else
 			s.push(a);
 	}
-	int candidate=s.top();
+	int candidate = s.top();
 
-	//checking for row
+	// checking for row
 	for (int i = 0; i < n; ++i)
 	{
-		if(v[candidate][i]==0 || candidate==i){
+		if (v[candidate][i] == 0 || candidate == i)
+		{
 			continue;
 		}
-		else{return -1;}
+		else
+		{
+			return -1;
+		}
 	}
-	//checking for column
+	// checking for column
 	for (int i = 0; i < m; ++i)
 	{
-		if(v[i][candidate]==1 || candidate==i){
+		if (v[i][candidate] == 1 || candidate == i)
+		{
 			continue;
 		}
-		else{return -1;}
+		else
+		{
+			return -1;
+		}
 	}
 	return candidate;
 }
@@ -271,7 +282,7 @@ int main()
 	cout << "= ";
 	cout << largestAreaRectangle(length);
 
-//-----------------------------------------------------
+	//-----------------------------------------------------
 
 	cout << "\n\n"
 		 << "Largest rectangle in 2-D array = ";
@@ -282,7 +293,7 @@ int main()
 	int n = 3, m = 3;
 	cout << largestAreaRectangle2DArray(rectangleArr, n, m);
 
-//-----------------------------------------------------
+	//-----------------------------------------------------
 
 	cout << "\n\n"
 		 << "Celebrity in 2-D array = ";
@@ -290,7 +301,7 @@ int main()
 		{0, 1, 1},
 		{0, 0, 0},
 		{1, 1, 0}};
-	cout << celebrityProblem(celebrityArr, n,m);
+	cout << celebrityProblem(celebrityArr, n, m);
 
 	return 0;
 }
