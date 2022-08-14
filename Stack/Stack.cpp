@@ -235,6 +235,31 @@ int celebrityProblem(vector<vector<int>> v, int n = 3, int m = 3)
 	return candidate;
 }
 
+bool redundantParanthesis(string &s){
+	stack<int> st;
+	for (int i = 0; i < s.length(); ++i)
+	{
+		char c=s[i];
+		if(c=='('|| c=='+'|| c=='-'|| c=='*'|| c=='/' || c=='a' || c=='b'){
+			st.push(c);
+		}
+		else{
+			bool isRedundant=true;
+			while(!st.empty() && st.top()!='(')
+			{
+				if(st.top()=='-' || st.top()=='+' || st.top()=='/' || st.top()=='*')
+					{
+						isRedundant=false;
+					}
+				st.pop();
+			}
+			st.pop();
+			if(isRedundant) return true;
+		}
+	}
+	return false;
+}
+
 int main()
 {
 	stack<int> s;
@@ -312,6 +337,13 @@ int main()
 		{0, 0, 0},
 		{1, 1, 0}};
 	cout << celebrityProblem(celebrityArr, n, m);
+
+	//-----------------------------------------------------
+
+	cout << "\n\n"
+		 << "Redundant Paranthesis = ";
+	string str="(a+b)";
+	cout << redundantParanthesis(str);
 
 	return 0;
 }
