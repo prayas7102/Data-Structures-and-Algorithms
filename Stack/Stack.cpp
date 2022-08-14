@@ -184,7 +184,7 @@ int largestAreaRectangle2DArray(vector<vector<int>> v, int n, int m)
 		area = max(largestAreaRectangle(v[i]), area);
 	}
 	return area;
-} 
+}
 
 int celebrityProblem(vector<vector<int>> v, int n = 3, int m = 3)
 {
@@ -248,10 +248,14 @@ int main()
 	cout << "Available Stack" << endl;
 	printStack(s);
 
+	//-----------------------------------------------------
+
 	cout << "\n\n"
 		 << "Deleting middle element" << endl;
 	deleteMiddleElement(s, 0, s.size() / 2);
 	printStack(s);
+
+	//-----------------------------------------------------
 
 	int x = 30;
 	cout << "\n\n"
@@ -259,9 +263,13 @@ int main()
 	addBottomElement(s, x);
 	printStack(s);
 
+	//-----------------------------------------------------
+
 	vector<char> vect{'{', '(', ')', '}', '}'};
 	cout << "\n\n";
 	checkBalancedParanthesis(vect) ? cout << "Balanced" : cout << "Unbalanced";
+
+	//-----------------------------------------------------
 
 	vector<int> v{6, 2, 3, 7, 8, 3};
 	cout << "\n\n";
@@ -274,6 +282,8 @@ int main()
 
 	v = nextOrPrevSmallerElement(v, false);
 	printVector(v);
+
+	//-----------------------------------------------------
 
 	cout << "Largest rectangle in histogram ";
 	cout << "\n\n";
