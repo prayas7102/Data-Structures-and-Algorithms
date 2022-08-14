@@ -235,29 +235,63 @@ int celebrityProblem(vector<vector<int>> v, int n = 3, int m = 3)
 	return candidate;
 }
 
-bool redundantParanthesis(string &s){
+bool redundantParanthesis(string &s)
+{
 	stack<int> st;
 	for (int i = 0; i < s.length(); ++i)
 	{
-		char c=s[i];
-		if(c=='('|| c=='+'|| c=='-'|| c=='*'|| c=='/' || c=='a' || c=='b'){
+		char c = s[i];
+		if (c == '(' || c == '+' || c == '-' || c == '*' || c == '/' || c == 'a' || c == 'b')
+		{
 			st.push(c);
 		}
-		else{
-			bool isRedundant=true;
-			while(!st.empty() && st.top()!='(')
+		else
+		{
+			bool isRedundant = true;
+			while (!st.empty() && st.top() != '(')
 			{
-				if(st.top()=='-' || st.top()=='+' || st.top()=='/' || st.top()=='*')
-					{
-						isRedundant=false;
-					}
+				if (st.top() == '-' || st.top() == '+' || st.top() == '/' || st.top() == '*')
+				{
+					isRedundant = false;
+				}
 				st.pop();
 			}
 			st.pop();
-			if(isRedundant) return true;
+			if (isRedundant)
+				return true;
 		}
 	}
 	return false;
+}
+
+int validateParanthesis(string &s)
+{
+	stack<int> st;
+	int a = 0, b = 0;
+	for (int i = 0; i < s.length(); ++i)
+	{
+		if (s[i] == '{')
+			st.push(s[i]);
+		else
+		{
+			if (!st.empty() && st.top() == '{')
+			{
+				st.pop();
+			}
+			else
+				st.push(s[i]);
+		}
+	}
+	if (s.empty())
+		return 0;
+	while (!st.empty())
+	{
+		st.top() == '{' ? a++ : b++;
+		st.pop();
+	}
+	if ((a % 2 == 0 && b % 2 == 0) || (a % 2 != 0 && b % 2 != 0))
+		return (a + 1) / 2 + (b + 1) / 2;
+	return -1;
 }
 
 int main()
@@ -342,8 +376,15 @@ int main()
 
 	cout << "\n\n"
 		 << "Redundant Paranthesis = ";
-	string str="(a+b)";
-	cout << redundantParanthesis(str);
+	string str = "((a+b))";
+	cout << str << " = " << redundantParanthesis(str);
+
+	//-----------------------------------------------------
+
+	cout << "\n\n"
+		 << "Minimum cost to validate Paranthesis = ";
+	string str1 = "{{}}{{";
+	cout << str1 << " = " << validateParanthesis(str1);
 
 	return 0;
 }
