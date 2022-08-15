@@ -376,7 +376,7 @@ int main()
 
 	cout << "\n\n"
 		 << "Redundant Paranthesis = ";
-	string str = "((a+b))";
+	string str = "(()())(())";
 	cout << str << " = " << redundantParanthesis(str);
 
 	//-----------------------------------------------------

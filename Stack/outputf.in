@@ -25,6 +25,6 @@ Largest rectangle in 2-D array = 4
 
 Celebrity in 2-D array = 1
 
-Redundant Paranthesis = ((a+b)) = 1
+Redundant Paranthesis = (()())(()) = 1
 
 Minimum cost to validate Paranthesis = {{}}{{ = 1
