@@ -3,6 +3,7 @@
 #include <queue>
 #include <stack>
 #include <vector>
+#include <map>
 using namespace std;
 
 void printQueue(queue<int> q)
@@ -51,7 +52,7 @@ void findFirstNegative(vector<int> v, int k)
 	{
 		// deleting element to check k elements in dq
 		// diff b/w i and dq.front() <= k
-		if (!dq.empty() && i >= k+dq.front())
+		if (!dq.empty() && i >= k + dq.front())
 		{
 			dq.pop_front();
 		}
@@ -78,8 +79,8 @@ void findFirstNegative(vector<int> v, int k)
 
 void reverseKelementsQueue(queue<int> &q, int k)
 {
-	stack<int>s;
-	int n=q.size();
+	stack<int> s;
+	int n = q.size();
 	for (int i = 0; i < k; ++i)
 	{
 		int ans = q.front();
@@ -92,11 +93,36 @@ void reverseKelementsQueue(queue<int> &q, int k)
 		q.push(ans);
 		s.pop();
 	}
-	for (int i = 0; i < n-k; ++i)
+	for (int i = 0; i < n - k; ++i)
 	{
 		int ans = q.front();
 		q.push(ans);
 		q.pop();
+	}
+}
+
+void firstNonRepeatingElement(string &s)
+{
+	map<char, int> m;
+	queue<char> q;
+	for (int i = 0; i < s.length(); ++i)
+	{
+		m[s[i]]++;
+		q.push(s[i]);
+		while (!q.empty())
+		{
+			if (m[q.front()] > 1)
+			{
+				q.pop();
+			}
+			else
+			{
+				s[i] = q.front();
+				break;
+			}
+		}
+		if (q.empty())
+			s[i] = '#';
 	}
 }
 
@@ -121,8 +147,20 @@ int main()
 	// reverse first k elements of queue
 	cout << "\n\nreverse first k elements of queue = ";
 	printQueue(q1);
-	reverseKelementsQueue(q1,k);
+	reverseKelementsQueue(q1, k);
 	printQueue(q1);
+
+	// reverse first k elements of queue
+	cout << "reverse first k elements of queue = ";
+	printQueue(q1);
+	reverseKelementsQueue(q1, k);
+	printQueue(q1);
+
+	// first non repeating element of string
+	string s = "aaabbcdeff";
+	cout << "first non repeating element of string = " << s << " is ";
+	firstNonRepeatingElement(s);
+	cout << s;
 
 	return 0;
 }
