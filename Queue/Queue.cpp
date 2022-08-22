@@ -126,6 +126,39 @@ void firstNonRepeatingElement(string &s)
 	}
 }
 
+void interleaveQueue(queue<int> &q2)
+{
+	stack<int> st;
+	int n = q2.size() / 2;
+	for (int i = 0; i < n; i++)
+	{
+		st.push(q2.front());
+		q2.pop();
+	}
+	while (!st.empty())
+	{
+		q2.push(st.top());
+		st.pop();
+	}
+	for (int i = 0; i < n; i++)
+	{
+		q2.push(q2.front());
+		q2.pop();
+	}
+	for (int i = 0; i < n; i++)
+	{
+		st.push(q2.front());
+		q2.pop();
+	}
+	while (!st.empty())
+	{
+		q2.push(q2.front());
+		q2.pop();
+		q2.push(st.top());
+		st.pop();
+	}
+}
+
 int main()
 {
 	// reverse a queue
@@ -160,7 +193,16 @@ int main()
 	string s = "aaabbcdeff";
 	cout << "first non repeating element of string = " << s << " is ";
 	firstNonRepeatingElement(s);
-	cout << s;
+	cout << s << endl
+		 << endl;
+
+	// interleave the first half of queue with other half
+	cout << "interleave the first half of queue with other half\n";
+	auto itr = {9, 6, 7, 8, 2, 3, 4, 1};
+	queue<int> q2(itr); // size of queue should be even
+	printQueue(q2);
+	interleaveQueue(q2);
+	printQueue(q2);
 
 	return 0;
 }
