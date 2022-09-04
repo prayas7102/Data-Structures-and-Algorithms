@@ -43,11 +43,15 @@ int main()
 {
 	Jobs Job[]={{1,2,50},{2,2,10},{3,2,40},{4,3,70}};
 	int n=sizeof(Job)/sizeof(Job[0]);
+	
+	// assuming starting time of all jobs = 0 sec.
+
 	cout<<"id"<<" "<<"deadline"<<" "<<"profit"<<endl;
 	for(int i=0;i<n;i++){
 		cout<<Job[i].id<<"      "<<Job[i].deadline<<"      "<<Job[i].profit<<endl;
 	}
 	JobScheduling(Job, n);
+	
 	
 	return 0;
 }
