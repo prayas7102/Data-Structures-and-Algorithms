@@ -78,6 +78,6 @@ int main()
 	cout << pop(s) << endl;
 	cout << top(s) << endl;
 	cout << isEmpty(s) << endl;
-	// cout << getMinElement(s);
+	cout << getMinElement(s);
 	return 0;
 }
