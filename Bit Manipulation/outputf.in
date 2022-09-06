@@ -1,3 +1,6 @@
+Binary form of 5
+0 0 0 0 0 0 0 0 1 0 1 
+
 Calculate the bit at 3rd postion in binary form of 5
 1
 Set the bit at 1st postion in binary form of 5
@@ -6,4 +9,26 @@ Clear the bit at 2nd postion in binary form of 5
 1
 Update the bit at 1st postion in binary form of 5
 7
-0
+No. of ones in binary form of 5
+2
+
+Alphabets in binary form 
+
+A
+Binary form of 65
+0 0 0 0 1 0 0 0 0 0 1 
+
+B
+Binary form of 66
+0 0 0 0 1 0 0 0 0 1 0 
+
+a
+Binary form of 97
+0 0 0 0 1 1 0 0 0 0 1 
+
+b
+Binary form of 98
+0 0 0 0 1 1 0 0 0 1 0 
+
+Changing A to a
+Changing a to A

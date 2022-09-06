@@ -2,6 +2,18 @@
 
 using namespace std;
 
+void printBinary(int n)
+{
+	cout << "Binary form of " << n << endl;
+	for (int i = 10; i >= 0; i--)
+	{
+		int k = (n >> i) & 1;
+		cout << k << " ";
+	}
+	cout << endl
+		 << endl;
+}
+
 void determineBit(int n, int pos)
 {
 	cout << "Calculate the bit at 3rd postion in binary form of " << n << endl;
@@ -33,15 +45,61 @@ void updateBit(int n, int pos, int val)
 	cout << m << endl;
 }
 
+void noOfOnes(int n)
+{
+	cout << "No. of ones in binary form of " << n << endl;
+	int count = 0;
+	while (n)
+	{
+		count++;
+		n = n & (n - 1);
+	}
+	cout << count << endl;
+}
+
+void printBinaryOfAlphabets()
+{
+	cout << endl
+		 << "Alphabets in binary form \n\n";
+	for (char c = 'A'; c <= 'B'; c++)
+	{
+		cout << c << endl;
+		printBinary(int(c));
+	}
+	for (char c = 'a'; c <= 'b'; c++)
+	{
+		cout << c << endl;
+		printBinary(int(c));
+	}
+
+	char A = 'A';
+	char a = A | (1 << 5); // A to a
+	cout << "Changing " << A << " to " << a << "\n";
+	A = a & ~(1 << 5);
+	cout << "Changing " << a << " to " << A << "\n";
+}
+
 int main()
 {
+	// “x” with an integer “y” denoted as ‘(x<<y)’ is equivalent to
+	// multiplying x with 2^y (2 raised to power y).
+	// eg: lets take N=22; which is 00010110 in Binary Form.
+	// Now, if “N is left-shifted by 2” i.e N=N<<2 then N will become N=N*(2^2).
+	// Thus, N=22*(2^2)=88 which can be written as 01011000.
+
+	// “x” with an integer “y” denoted as ‘(x>>y)‘ is equivalent to
+	// dividing x with 2^y.
+	// eg: lets take N=32; which is 100000 in Binary Form.
+	// Now, if “N is right-shifted by 2” i.e N=N>>2 then N will become N=N/(2^2).
+	// Thus, N=32/(2^2)=8 which can be written as 1000.
+
 	int n = 5, pos = 3;
+	printBinary(n);
 	determineBit(n, pos);
 	setBit(n, 1);
 	clearBit(n, 2);
 	updateBit(5, 1, 1);
-	int x = 0 << 1;
-	cout << x;
-
+	noOfOnes(5);
+	printBinaryOfAlphabets();
 	return 0;
 }
