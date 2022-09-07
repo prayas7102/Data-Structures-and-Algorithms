@@ -79,6 +79,38 @@ void printBinaryOfAlphabets()
 	cout << "Changing " << a << " to " << A << "\n";
 }
 
+bool powerOfTwo(int n)
+{
+	// n = 8 == 100, n-1 = 7 = 011
+	int ans = n & n - 1;
+	return !ans;
+}
+
+void arraySubsets(char arr[], int n)
+{
+	// 1<<n = 1*(2^n)
+	for (int i = 0; i < 1 << n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (i & (1 << j))
+				cout << arr[j] << " ";
+		}
+		cout << endl;
+	}
+}
+
+void findUniqueElement(int arr[], int n)
+{
+	int ans = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		ans = ans ^ arr[i];
+	}
+	cout << endl
+		 << "find unique element = " << ans << endl;
+}
+
 int main()
 {
 	// “x” with an integer “y” denoted as ‘(x<<y)’ is equivalent to
@@ -93,7 +125,8 @@ int main()
 	// Now, if “N is right-shifted by 2” i.e N=N>>2 then N will become N=N/(2^2).
 	// Thus, N=32/(2^2)=8 which can be written as 1000.
 
-	int n = 5, pos = 3;
+	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5};
+	char arr[] = {'a', 'b', 'c'};
 	printBinary(n);
 	determineBit(n, pos);
 	setBit(n, 1);
@@ -101,5 +134,9 @@ int main()
 	updateBit(5, 1, 1);
 	noOfOnes(5);
 	printBinaryOfAlphabets();
+	n = 8;
+	cout << "\npwer of two ?" << n << " " << powerOfTwo(n) << endl;
+	arraySubsets(arr, 3);
+	findUniqueElement(unique, 9);
 	return 0;
 }
