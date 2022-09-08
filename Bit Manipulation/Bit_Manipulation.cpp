@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 void printBinary(int n)
@@ -14,47 +14,42 @@ void printBinary(int n)
 		 << endl;
 }
 
-void determineBit(int n, int pos)
+int determineBit(int n, int pos)
 {
-	cout << "Calculate the bit at 3rd postion in binary form of " << n << endl;
 	int x = n & (1 << pos) != 0;
-	cout << x << endl;
+	return x;
 }
 
 // 0-->1
-void setBit(int n, int pos)
+int setBit(int n, int pos)
 {
-	cout << "Set the bit at 1st postion in binary form of " << n << endl;
 	int x = n | (1 << pos);
-	cout << x << endl;
+	return x;
 }
 
 // 1->> 0
-void clearBit(int n, int pos)
+int clearBit(int n, int pos)
 {
-	cout << "Clear the bit at 2nd postion in binary form of " << n << endl;
 	int x = n & ~(1 << pos);
-	cout << x << endl;
+	return x;
 }
 
-void updateBit(int n, int pos, int val)
+int updateBit(int n, int pos, int val)
 {
-	cout << "Update the bit at 1st postion in binary form of " << n << endl;
 	int x = n & ~(1 << pos);
 	int m = x | (val << pos);
-	cout << m << endl;
+	return m;
 }
 
-void noOfOnes(int n)
+int noOfOnes(int n)
 {
-	cout << "No. of ones in binary form of " << n << endl;
 	int count = 0;
 	while (n)
 	{
 		count++;
 		n = n & (n - 1);
 	}
-	cout << count << endl;
+	return count;
 }
 
 void printBinaryOfAlphabets()
@@ -108,7 +103,65 @@ void findUniqueElement(int arr[], int n)
 		ans = ans ^ arr[i];
 	}
 	cout << endl
-		 << "find unique element = " << ans << endl;
+		 << "unique element in array = " << ans << endl;
+}
+
+void findUniqueTwoElement(int arr[], int n)
+{
+	cout << endl
+		 << "two unique element in array = ";
+	int xorsum = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		xorsum = xorsum ^ arr[i];
+	}
+	int itr = 0;
+	int pos = 0;
+	while (itr != 1)
+	{
+		itr = xorsum & 1 << pos;
+		pos++;
+		// xorsum=xorsum>>1;
+	}
+	int newxor = 0;
+	for (int i = 0; i < n; ++i)
+	{
+		if (determineBit(arr[i], pos - 1))
+		{
+			newxor ^= arr[i];
+		}
+	}
+	cout << newxor << " ";
+	int ans = newxor ^ xorsum;
+	cout << ans;
+}
+
+void findUniqueThreeElement(int arr[], int n)
+{
+	cout << endl
+		 << "one unique element in array with 3 duplicates= ";
+	vector<int> v;
+	for (int i = 0; i < 10; i++)
+	{
+		int sum = 0;
+		if (i <= n)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				if (determineBit(arr[j], i))
+				{
+					sum++;
+					cout << arr[j];
+				}
+			}
+			cout << endl;
+			v.push_back(sum);
+		}
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		cout << v[i] << endl;
+	}
 }
 
 int main()
@@ -125,18 +178,39 @@ int main()
 	// Now, if “N is right-shifted by 2” i.e N=N>>2 then N will become N=N/(2^2).
 	// Thus, N=32/(2^2)=8 which can be written as 1000.
 
-	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5};
+	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5}, unique2[] = {1, 2, 2, 3, 3, 4, 5, 5};
+	int unique3[] = {1, 1, 1, 2, 3, 3, 3, 5, 5, 5};
+
 	char arr[] = {'a', 'b', 'c'};
 	printBinary(n);
-	determineBit(n, pos);
-	setBit(n, 1);
-	clearBit(n, 2);
-	updateBit(5, 1, 1);
-	noOfOnes(5);
+
+	cout << "Calculate the bit at 3rd postion in binary form of " << n << endl;
+	cout << determineBit(n, pos) << endl;
+
+	cout << "Set the bit at 1st postion in binary form of " << n << endl;
+	cout << setBit(n, 1) << endl;
+
+	cout << "Clear the bit at 2nd postion in binary form of " << n << endl;
+	cout << clearBit(n, 2) << endl;
+
+	cout << "Update the bit at 1st postion in binary form of " << n << endl;
+	cout << updateBit(5, 1, 1) << endl;
+
+	cout << "No. of ones in binary form of " << n << endl;
+	cout << noOfOnes(5) << endl;
+
 	printBinaryOfAlphabets();
+
 	n = 8;
-	cout << "\npwer of two ?" << n << " " << powerOfTwo(n) << endl;
+	cout << "\npower of two ?" << n << " " << powerOfTwo(n) << endl;
+
 	arraySubsets(arr, 3);
+
 	findUniqueElement(unique, 9);
+
+	findUniqueTwoElement(unique2, 8);
+
+	findUniqueThreeElement(unique3, 10);
+
 	return 0;
 }
