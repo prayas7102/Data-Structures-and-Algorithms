@@ -17,7 +17,7 @@ void printBinary(int n)
 int determineBit(int n, int pos)
 {
 	int x = n & (1 << pos) != 0;
-	return x;
+	return x ;
 }
 
 // 0-->1
@@ -31,7 +31,7 @@ int setBit(int n, int pos)
 int clearBit(int n, int pos)
 {
 	int x = n & ~(1 << pos);
-	return x;
+	return x ;
 }
 
 int updateBit(int n, int pos, int val)
@@ -74,94 +74,72 @@ void printBinaryOfAlphabets()
 	cout << "Changing " << a << " to " << A << "\n";
 }
 
-bool powerOfTwo(int n)
-{
+bool powerOfTwo(int n){
 	// n = 8 == 100, n-1 = 7 = 011
-	int ans = n & n - 1;
+	int ans=n&n-1;
 	return !ans;
 }
 
-void arraySubsets(char arr[], int n)
-{
+void arraySubsets(char arr[], int n){
 	// 1<<n = 1*(2^n)
-	for (int i = 0; i < 1 << n; i++)
+	for (int i = 0; i < 1<<n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			if (i & (1 << j))
-				cout << arr[j] << " ";
+			if(i & (1<<j)) cout<<arr[j]<<" ";
 		}
-		cout << endl;
+		cout<<endl;
 	}
 }
 
-void findUniqueElement(int arr[], int n)
-{
-	int ans = 0;
+void findUniqueElement(int arr[], int n){
+	int ans=0;
 	for (int i = 0; i < n; ++i)
 	{
-		ans = ans ^ arr[i];
+		ans=ans^arr[i];
 	}
-	cout << endl
-		 << "unique element in array = " << ans << endl;
+	cout<<endl<<"unique element in array = "<<ans<<endl;
 }
 
-void findUniqueTwoElement(int arr[], int n)
-{
-	cout << endl
-		 << "two unique element in array = ";
-	int xorsum = 0;
+void findUniqueTwoElement(int arr[], int n){
+	cout<<endl<<"two unique element in array = ";
+	int xorsum=0;
 	for (int i = 0; i < n; ++i)
 	{
-		xorsum = xorsum ^ arr[i];
+		xorsum=xorsum^arr[i];
 	}
-	int itr = 0;
-	int pos = 0;
-	while (itr != 1)
-	{
-		itr = xorsum & 1 << pos;
+	int itr=0;
+	int pos=0;
+	while(itr!=1){
+		itr=xorsum & 1<<pos;
 		pos++;
 		// xorsum=xorsum>>1;
 	}
-	int newxor = 0;
+	int newxor=0;
 	for (int i = 0; i < n; ++i)
 	{
-		if (determineBit(arr[i], pos - 1))
-		{
-			newxor ^= arr[i];
-		}
+		if(determineBit(arr[i],pos-1)) {newxor^=arr[i];}
 	}
-	cout << newxor << " ";
-	int ans = newxor ^ xorsum;
-	cout << ans;
+	cout<<newxor<<" ";
+	int ans=newxor^xorsum;
+	cout<<ans;
+	
 }
 
-void findUniqueThreeElement(int arr[], int n)
-{
-	cout << endl
-		 << "one unique element in array with 3 duplicates= ";
+void findUniqueThreeElement(int arr[], int n){
+	cout<<endl<<"one unique element in array with 3 duplicates= ";
 	vector<int> v;
-	for (int i = 0; i < 10; i++)
-	{
-		int sum = 0;
-		if (i <= n)
-		{
+	for(int i=0;i<10;i++){
+		int sum=0;
+		if(i<=n) {
 			for (int j = 0; j < n; j++)
 			{
-				if (determineBit(arr[j], i))
-				{
-					sum++;
-					cout << arr[j];
-				}
+				if(determineBit(arr[j],i)) {sum++;}
 			}
-			cout << endl;
 			v.push_back(sum);
 		}
 	}
-	for (int i = 0; i < 10; i++)
-	{
-		cout << v[i] << endl;
-	}
+	for(int i=0;i<10;i++){cout<<v[i]<<endl;}
 }
 
 int main()
@@ -178,39 +156,39 @@ int main()
 	// Now, if “N is right-shifted by 2” i.e N=N>>2 then N will become N=N/(2^2).
 	// Thus, N=32/(2^2)=8 which can be written as 1000.
 
-	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5}, unique2[] = {1, 2, 2, 3, 3, 4, 5, 5};
-	int unique3[] = {1, 1, 1, 2, 3, 3, 3, 5, 5, 5};
+	int n = 5, pos = 3, unique[]={1,2,1,2,3,3,4,5,5}, unique2[]={1,2,2,3,3,4,5,5};
+	int unique3[]={1,1,1,2,3,3,3,5,5,5};
 
-	char arr[] = {'a', 'b', 'c'};
+	char arr[]={'a','b','c'};
 	printBinary(n);
 
 	cout << "Calculate the bit at 3rd postion in binary form of " << n << endl;
-	cout << determineBit(n, pos) << endl;
+	cout<<determineBit(n, pos)<<endl;
 
 	cout << "Set the bit at 1st postion in binary form of " << n << endl;
-	cout << setBit(n, 1) << endl;
+	cout<<setBit(n, 1)<<endl;
 
 	cout << "Clear the bit at 2nd postion in binary form of " << n << endl;
-	cout << clearBit(n, 2) << endl;
+	cout<<clearBit(n, 2)<<endl;
 
 	cout << "Update the bit at 1st postion in binary form of " << n << endl;
-	cout << updateBit(5, 1, 1) << endl;
+	cout<<updateBit(5, 1, 1)<<endl;
 
 	cout << "No. of ones in binary form of " << n << endl;
-	cout << noOfOnes(5) << endl;
+	cout<<noOfOnes(5)<<endl;
 
 	printBinaryOfAlphabets();
 
-	n = 8;
-	cout << "\npower of two ?" << n << " " << powerOfTwo(n) << endl;
+	n=8;
+	cout<<"\npower of two ?"<<n<<" "<<powerOfTwo(n)<<endl;
 
-	arraySubsets(arr, 3);
+	arraySubsets(arr,3);
 
-	findUniqueElement(unique, 9);
+	findUniqueElement(unique,9);
 
-	findUniqueTwoElement(unique2, 8);
+	findUniqueTwoElement(unique2,8);
 
-	findUniqueThreeElement(unique3, 10);
+	findUniqueThreeElement(unique3,10);
 
 	return 0;
 }
