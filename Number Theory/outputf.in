@@ -1,0 +1,10 @@
+gcd of two numbers 10 and 12 = 2
+gcd of two numbers 10 and 85 = 5
+
+swap two numbers using bit manipulation 10999 27650
+numbers after swapping 27650 10999
+
+Power of a number using binary exponentiation (recursive) 10999 27650 = 726642618
+
+Power of a number using binary exponentiation (iterative) 10999 27650 = 849665517
+
