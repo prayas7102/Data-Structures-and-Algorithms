@@ -1,8 +1,8 @@
-Binary form of 5
-0 0 0 0 0 0 0 0 1 0 1 
+Binary form of 526
+0 0 0 0 0 0 1 0 0 0 0 0 1 1 1 0 
 
 Calculate the bit at 3rd postion in binary form of 5
-1
+0
 Set the bit at 1st postion in binary form of 5
 7
 Clear the bit at 2nd postion in binary form of 5
@@ -16,19 +16,19 @@ Alphabets in binary form
 
 A
 Binary form of 65
-0 0 0 0 1 0 0 0 0 0 1 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
 
 B
 Binary form of 66
-0 0 0 0 1 0 0 0 0 1 0 
+0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 
 
 a
 Binary form of 97
-0 0 0 0 1 1 0 0 0 0 1 
+0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 1 
 
 b
 Binary form of 98
-0 0 0 0 1 1 0 0 0 1 0 
+0 0 0 0 0 0 0 0 0 1 1 0 0 0 1 0 
 
 Changing A to a
 Changing a to A
@@ -44,4 +44,10 @@ b c
 a b c 
 
 unique element in array = 4
+
+two unique element in array = 3 4
+
+one unique element in array with 3 duplicates= 29
+
+Decimal No. after reversing the binary representation of 1170935981635801664 = 38274066
 

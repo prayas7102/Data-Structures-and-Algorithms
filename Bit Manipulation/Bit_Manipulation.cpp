@@ -1,17 +1,29 @@
 #include <iostream>
 #include <vector>
+#include <math.h>
 using namespace std;
 
 void printBinary(int n)
 {
 	cout << "Binary form of " << n << endl;
-	for (int i = 10; i >= 0; i--)
+	for (int i = 15; i >= 0; i--)
 	{
 		int k = (n >> i) & 1;
 		cout << k << " ";
 	}
 	cout << endl
 		 << endl;
+}
+
+unsigned long long reverseBits(long long n)
+{
+	unsigned long long s = 0;
+	for (long long i = 32; i >= 0; i--)
+	{
+		unsigned long long k = (n >> i) & 1;
+		s += k * pow(2, 31 - i);
+	}
+	return s;
 }
 
 int determineBit(int n, int pos)
@@ -156,12 +168,12 @@ void findUniqueThreeElement(int arr[], int n)
 			v.push_back(sum);
 		}
 	}
-	long long sum=0;
+	long long sum = 0;
 	for (int i = 0; i < 10; i++)
 	{
-		sum+=v[i]*pow(2,i);
+		sum += v[i] * pow(2, i);
 	}
-	cout<<sum<<endl;
+	cout << sum << endl;
 }
 
 int main()
@@ -178,11 +190,12 @@ int main()
 	// Now, if “N is right-shifted by 2” i.e N=N>>2 then N will become N=N/(2^2).
 	// Thus, N=32/(2^2)=8 which can be written as 1000.
 
-	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5}, unique2[] = {1, 2, 1, 3, 2, 5};
+	int n = 5, pos = 3, unique[] = {1, 2, 1, 2, 3, 3, 4, 5, 5}, unique2[] = {1, 1, 2, 2, 3, 4, 3};
 	int unique3[] = {1, 1, 1, 2, 3, 3, 3, 5, 5, 5};
+	unsigned long long n32 = 00000010100101000001111010011100;
 
 	char arr[] = {'a', 'b', 'c'};
-	printBinary(n);
+	printBinary(526);
 
 	cout << "Calculate the bit at 3rd postion in binary form of " << n << endl;
 	cout << determineBit(n, pos) << endl;
@@ -209,8 +222,13 @@ int main()
 	findUniqueElement(unique, 9);
 
 	findUniqueTwoElement(unique2, 6);
+	cout << endl;
 
 	findUniqueThreeElement(unique3, 10);
+	cout << endl;
+
+	cout << "Decimal No. after reversing the binary representation of " << n32 << " = " << reverseBits(n32) << endl
+		 << endl;
 
 	return 0;
 }
