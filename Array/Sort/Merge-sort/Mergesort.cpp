@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 void Merge(int *arr, int lb, int ub)
 {
 	int mid = (lb + ub) / 2;
@@ -54,8 +55,9 @@ void MergeSort(int *arr, int lb, int ub)
 int main()
 {
 	int arr[8] = {1, 2, 6, 3, 4, 55, 6, 7};
-	MergeSort(arr, 0, sizeof(arr) / sizeof(arr[0]) - 1);
-	for (int i = 0; i < sizeof(arr) / sizeof(arr[0]); ++i)
+	int n = sizeof(arr) / sizeof(arr[0]);
+	MergeSort(arr, 0, n - 1);
+	for (int i = 0; i < n; ++i)
 	{
 		cout << arr[i] << " ";
 	}
