@@ -1,6 +1,43 @@
-Position of 12 using binarySearch 4
-Position of 12 using binarySearch recursive 4
+Position of 12 using binarySearch 3
+Position of 12 using binarySearch recursive 3
 
 iah_ayituk_inilahs = string reversed to = shalini_kutiya_hai
+
 10 is not a palindronme
+
+Following is the recursive combinations
+
+12 
+6 
+6 12 
+3 
+3 12 
+3 6 
+3 6 12 
+0 
+0 12 
+0 6 
+0 6 12 
+0 3 
+0 3 12 
+0 3 6 
+0 3 6 12 
+
+Following is the recursive combinations
+
+m 
+a 
+a m 
+r 
+r m 
+r a 
+r a m 
+
+Following is the recursive permutation
+r a m 
+r m a 
+a r m 
+a m r 
+m a r 
+m r a 
 
