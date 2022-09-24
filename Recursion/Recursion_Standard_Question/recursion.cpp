@@ -60,9 +60,10 @@ void arraySubset(vector<vector<int>> &ans, vector<int> output, int index, vector
 	// exclusion of elements
 	arraySubset(ans, output, index + 1, num);
 
+	// inclusion of elements
+
 	output.push_back(num[index]);
 
-	// inclusion of elements
 	arraySubset(ans, output, index + 1, num);
 }
 
@@ -75,8 +76,9 @@ void subsetString(vector<string> &ans, string output, int index, string str)
 	}
 	// exclusion of elements
 	subsetString(ans, output, index + 1, str);
-	output.push_back(str[index]);
+
 	// inclusion of elements
+	output.push_back(str[index]);
 	subsetString(ans, output, index + 1, str);
 }
 
@@ -91,6 +93,7 @@ void stringPermutation(vector<string> &ans, int index, string str)
 	{
 		swap(str[i], str[index]);
 		stringPermutation(ans, index + 1, str);
+		// backtracking
 		swap(str[i], str[index]);
 	}
 }
@@ -108,7 +111,17 @@ void keypadCombinations(string digit, int index, string output, vector<string> m
 	{
 		output.push_back(val[i]);
 		keypadCombinations(digit, index+1, output, mapping, collection);
+		// backtracking
 		output.pop_back();
+	}
+}
+
+void inline printVectorString(vector<string> s){
+	for (auto i : s)
+	{
+		for (auto j : i)
+			cout << j << " ";
+		cout << endl;
 	}
 }
 
@@ -147,24 +160,15 @@ int main()
 	vector<string> answer2;
 	subsetString(answer2, output2, 0, test);
 	cout << "Following is the recursive combinations" << endl;
-	for (auto i : answer2)
-	{
-		for (auto &j : i)
-			cout << j << " ";
-		cout << endl;
-	}
+	printVectorString(answer2);
 
 	cout << endl;
 
 	vector<string> answer3;
 	stringPermutation(answer3, 0, test);
 	cout << "Following is the recursive permutation" << endl;
-	for (auto i : answer3)
-	{
-		for (auto &j : i)
-			cout << j << " ";
-		cout << endl;
-	}
+	printVectorString(answer3);
+
 	cout << endl;
 
 	cout<<"KeyPad Problem"<<endl;
@@ -173,12 +177,7 @@ int main()
 	vector<string> collection;
 	output2="";
 	keypadCombinations(test,0,output2,mapping,collection);
-	for (auto i : collection)
-	{
-		for (auto &j : i)
-			cout << j << " ";
-		cout << endl;
-	}
+	printVectorString(collection);
 
 	return 0;
 }
