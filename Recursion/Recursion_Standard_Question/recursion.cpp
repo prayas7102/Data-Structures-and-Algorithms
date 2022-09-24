@@ -95,6 +95,23 @@ void stringPermutation(vector<string> &ans, int index, string str)
 	}
 }
 
+void keypadCombinations(string digit, int index, string output, vector<string> mapping, vector<string> &collection){
+	if(index>=digit.length()){
+		collection.push_back(output);
+		return;
+	}
+
+	int num=digit[index]-'0';
+	string val=mapping[num];
+
+	for (int i = 0; i < val.length(); ++i)
+	{
+		output.push_back(val[i]);
+		keypadCombinations(digit, index+1, output, mapping, collection);
+		output.pop_back();
+	}
+}
+
 int main()
 {
 	vector<int> a{0, 3, 6, 12};
@@ -149,6 +166,19 @@ int main()
 		cout << endl;
 	}
 	cout << endl;
+
+	cout<<"KeyPad Problem"<<endl;
+	vector<string> mapping{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+	test="34";
+	vector<string> collection;
+	output2="";
+	keypadCombinations(test,0,output2,mapping,collection);
+	for (auto i : collection)
+	{
+		for (auto &j : i)
+			cout << j << " ";
+		cout << endl;
+	}
 
 	return 0;
 }
