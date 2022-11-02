@@ -93,6 +93,54 @@ int maxValue(Node *&root)
 	return temp->data;
 }
 
+Node *deleteNode(Node *root, int data)
+{
+
+	if (!root)
+		return root;
+
+	if (root->data == data)
+	{
+		if (!root->left && !root->right)
+		{
+			delete root;
+			return NULL;
+		}
+		else if (root->left && !root->right)
+		{
+			delete root;
+			root = root->left;
+			return root;
+		}
+		else if (!root->left && root->right)
+		{
+			delete root;
+			root = root->right;
+			return root;
+		}
+		else
+		{
+			int mini = minValue(root->right);
+			root->data = mini;
+			root->right = deleteNode(root->right, mini);
+			return root;
+		}
+	}
+
+	else if (root->data > data)
+	{
+		root->left = deleteNode(root->left, data);
+		return root;
+	}
+
+	else
+	{
+		root->right = deleteNode(root->right, data);
+		return root;
+	}
+	return root;
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -103,6 +151,11 @@ int main()
 
 	cout << "Minimum Value " << minValue(root) << "\n\n";
 	cout << "Maximum Value " << maxValue(root) << "\n\n";
+
+	cout << "Tree after deleting 38 from tree"
+		 << "\n\n";
+	root = deleteNode(root, 30);
+	levelOrderTraversal(root);
 
 	return 0;
 }
