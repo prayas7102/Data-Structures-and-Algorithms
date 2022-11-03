@@ -13,3 +13,6 @@ Tree after deleting 38 from tree
 15 38 
 23 60 
 28 
+
+InOrderTraversal of BST
+15 23 28 34 38 60 

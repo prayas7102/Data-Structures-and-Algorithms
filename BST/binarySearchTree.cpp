@@ -16,6 +16,15 @@ public:
 	}
 };
 
+void InOrderTraversal(Node *root)
+{
+	if (!root)
+		return;
+	InOrderTraversal(root->left);
+	cout << root->data << " ";
+	InOrderTraversal(root->right);
+}
+
 void levelOrderTraversal(Node *root)
 {
 	queue<Node *> container;
@@ -156,6 +165,10 @@ int main()
 		 << "\n\n";
 	root = deleteNode(root, 30);
 	levelOrderTraversal(root);
+	cout << "\n";
+
+	cout << "InOrderTraversal of BST" << endl;
+	InOrderTraversal(root);
 
 	return 0;
 }
