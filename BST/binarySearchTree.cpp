@@ -150,10 +150,77 @@ Node *deleteNode(Node *root, int data)
 	return root;
 }
 
+Node *findNode(Node *root, int data)
+{
+	if (!root)
+		return NULL;
+	if (root->data == data)
+	{
+		return root;
+	}
+	if (root->data > data)
+	{
+		root->left = findNode(root->left, data);
+	}
+	else
+	{
+		root->right = findNode(root->right, data);
+	}
+}
+
+Node *LCA(Node *root, Node *first, Node *second)
+{
+	if (!root)
+	{
+		return NULL;
+	}
+	if (root->data > first->data && root->data > second->data)
+	{
+		return LCA(root->left, first, second);
+	}
+	if (root->data < first->data && root->data < second->data)
+	{
+		return LCA(root->right, first, second);
+	}
+	return root;
+}
+
+int InorderPredecessor(Node *val)
+{
+	Node *rightTree = val->left;
+	int ans = rightTree->data;
+	while (!rightTree)
+	{
+		ans = rightTree->data;
+		cout << ans;
+		rightTree = rightTree->right;
+	}
+	return ans;
+}
+
+int InorderSuccessor(Node *val)
+{
+	Node *leftTree = val->right;
+	int ans = leftTree->data;
+	while (!leftTree)
+	{
+		ans = leftTree->data;
+		leftTree = leftTree->left;
+	}
+	return ans;
+}
+
 int main()
 {
 	Node *root = NULL;
 	takeInput(root);
+
+	cout << "InOrderTraversal of BST" << endl;
+	InOrderTraversal(root);
+
+	cout << "\n\n";
+
+	cout << "LevelOrderTraversal of BST" << endl;
 	levelOrderTraversal(root);
 
 	cout << "\n";
@@ -167,8 +234,13 @@ int main()
 	levelOrderTraversal(root);
 	cout << "\n";
 
-	cout << "InOrderTraversal of BST" << endl;
-	InOrderTraversal(root);
+	Node *first = findNode(root, 38);
+	Node *second = findNode(root, 60);
+	Node *third = findNode(root, 34);
 
+	cout << " Inorder Predecessor of 34: " << InorderPredecessor(third) << "\n\n";
+	cout << " Inorder Successor of 34: " << InorderSuccessor(third) << "\n\n";
+
+	cout << " LCA of 38 & 60: " << LCA(root, first, second)->data << "\n\n";
 	return 0;
 }
