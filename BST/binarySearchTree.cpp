@@ -233,6 +233,7 @@ Node *rightmost(Node *root)
 
 void flatten(Node *root)
 {
+	// converts to single link list
 	if (root == NULL)
 		return;
 	Node *nextright;
@@ -275,6 +276,23 @@ Node *buildBstFromInorder(vector<int> v, int start, int end)
 	return root;
 }
 
+void convertBstToSortedDLL(Node *root, Node **headDLL)
+{
+	if (!root)
+		return;
+	static Node *prev = NULL;
+	convertBstToSortedDLL(root->right, headDLL);
+	if (!prev)
+		*headDLL = root;
+	else
+	{
+		root->left = prev;
+		prev->right = root;
+	}
+	prev = root;
+	convertBstToSortedDLL(root->left, headDLL);
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -311,6 +329,14 @@ int main()
 	cout << " Make a balanced search tree out of the given tree "
 		 << "\n\n";
 	levelOrderTraversal(BalanceBST(0, v.size() - 1));
+
+	Node *headDLL = NULL;
+	convertBstToSortedDLL(root, &headDLL);
+	while (headDLL != NULL)
+	{
+		cout << headDLL->data << " ";
+		headDLL = headDLL->right;
+	}
 
 	return 0;
 }
