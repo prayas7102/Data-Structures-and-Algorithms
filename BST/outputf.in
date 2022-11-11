@@ -24,3 +24,8 @@ Tree after deleting 38 from tree
 
  LCA of 38 & 60: 34
 
+ Make a balanced search tree out of the given tree 
+
+30 
+23 38 
+15 28 34 60 

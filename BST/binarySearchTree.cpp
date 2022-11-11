@@ -2,6 +2,8 @@
 #include <queue>
 using namespace std;
 
+vector<int> v;
+
 class Node
 {
 public:
@@ -22,6 +24,7 @@ void InOrderTraversal(Node *root)
 		return;
 	InOrderTraversal(root->left);
 	cout << root->data << " ";
+	v.push_back(root->data);
 	InOrderTraversal(root->right);
 }
 
@@ -210,6 +213,45 @@ int InorderSuccessor(Node *val)
 	return ans;
 }
 
+Node *BalanceBST(int s, int e)
+{
+	if (s > e)
+		return NULL;
+	int mid = (s + e) / 2;
+	Node *root = new Node(v[mid]);
+	root->left = BalanceBST(s, mid - 1);
+	root->right = BalanceBST(mid + 1, e);
+	return root;
+}
+
+Node *rightmost(Node *root)
+{
+	if (root->right == NULL)
+		return root;
+	return rightmost(root->right);
+}
+
+void flatten(Node *root)
+{
+	if (root == NULL)
+		return;
+	Node *nextright;
+	Node *rightMOST;
+
+	while (root)
+	{
+		if (root->left)
+		{
+			rightMOST = rightmost(root->left);
+			nextright = root->right;
+			root->right = root->left;
+			root->left = NULL;
+			rightMOST->right = nextright;
+		}
+		root = root->right;
+	}
+}
+
 int main()
 {
 	Node *root = NULL;
@@ -242,5 +284,10 @@ int main()
 	cout << " Inorder Successor of 34: " << InorderSuccessor(third) << "\n\n";
 
 	cout << " LCA of 38 & 60: " << LCA(root, first, second)->data << "\n\n";
+
+	cout << " Make a balanced search tree out of the given tree "
+		 << "\n\n";
+	levelOrderTraversal(BalanceBST(0, v.size() - 1));
+
 	return 0;
 }
