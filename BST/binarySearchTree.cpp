@@ -252,6 +252,29 @@ void flatten(Node *root)
 	}
 }
 
+Node *buildBstFromPreOrder(vector<int> &A, int &i, int bound)
+{
+	if (i == A.size() || A[i] > bound)
+	{
+		return NULL;
+	}
+	Node *root = new Node(A[i++]);
+	root->left = buildBstFromPreOrder(A, i, root->data);
+	root->right = buildBstFromPreOrder(A, i, bound);
+	return root;
+}
+
+Node *buildBstFromInorder(vector<int> v, int start, int end)
+{
+	if (start > end)
+		return NULL;
+	int mid = (start + end) / 2;
+	Node *root = new Node(v[mid]);
+	root->left = buildBstFromInorder(v, start, mid - 1);
+	root->right = buildBstFromInorder(v, mid + 1, end);
+	return root;
+}
+
 int main()
 {
 	Node *root = NULL;
