@@ -18,6 +18,34 @@ public:
 	}
 };
 
+class Nodevalue
+{
+public:
+	int maxNode, minNode, maxSize;
+	Nodevalue(int maxNode, int minNode, int maxSize)
+	{
+		this->maxNode = maxNode;
+		this->minNode = minNode;
+		this->maxSize = maxSize;
+	}
+};
+
+Nodevalue LargestBSTSubTree(Node *root)
+{
+	if (!root)
+		return Nodevalue(INT_MIN, INT_MAX, 0);
+
+	auto left = LargestBSTSubTree(root->left);
+	auto right = LargestBSTSubTree(root->right);
+
+	if (left.maxNode < root->data && right.minNode > root->data)
+	{
+
+		return Nodevalue(min(root->data, left.minNode), max(root->data, right.maxNode), left.maxSize + right.maxSize + root->data);
+	}
+	return Nodevalue(INT_MAX, INT_MIN, max(left.maxSize, right.maxSize));
+}
+
 void InOrderTraversal(Node *root)
 {
 	if (!root)
@@ -337,6 +365,8 @@ int main()
 		cout << headDLL->data << " ";
 		headDLL = headDLL->right;
 	}
+
+	cout << LargestBSTSubTree(root).maxSize;
 
 	return 0;
 }
