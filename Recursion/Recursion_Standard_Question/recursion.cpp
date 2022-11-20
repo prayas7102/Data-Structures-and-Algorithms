@@ -57,14 +57,78 @@ void arraySubset(vector<vector<int>> &ans, vector<int> output, int index, vector
 		return;
 	}
 
-	// exclusion of elements
-	arraySubset(ans, output, index + 1, num);
-
 	// inclusion of elements
-
 	output.push_back(num[index]);
-
 	arraySubset(ans, output, index + 1, num);
+
+	// exclusion of elements
+	output.pop_back();
+	arraySubset(ans, output, index + 1, num);
+}
+
+void subsetSum(vector<vector<int>> &ans, int sum, int index, vector<int> num)
+{
+	if (index >= num.size())
+	{
+		ans.push_back(sum);
+		return;
+	}
+
+	// picking of elements
+	arraySubset(ans, sum + num[index], index + 1, num);
+
+	// not picking of elements
+	arraySubset(ans, sum, index + 1, num);
+}
+
+// leetcode https://leetcode.com/problems/combination-sum/
+// each element can be repeated.
+void CombinationSum(int index, vector<int> arr, vector<int> output, vector<vector<int>> &ans, int target)
+{
+	if (index >= arr.size())
+	{
+		if (0 == target)
+		{
+			ans.push_back(output);
+		}
+		return;
+	}
+
+	if (arr[index] <= target)
+	{
+		output.push_back(arr[index]);
+
+		// index remains same to preserve repetition
+		Combination(index, arr, output, ans, target - arr[index]);
+
+		output.pop_back();
+	}
+	// index is changed to get other elements
+	Combination(index + 1, arr, output, ans, target);
+}
+
+// leetcode https://leetcode.com/problems/combination-sum-ii/
+// each element cannot be repeated.
+void CombinationSumNoRepition(vector<vector<int>> &ans, vector<int> output, int index, vector<int> arr, int target)
+{
+	if (index >= arr.size())
+	{
+		if (target == 0)
+			ans.push_back(output);
+		return;
+	}
+
+	if (arr[index] <= target)
+	{
+
+		// inclusion of elements
+		output.push_back(arr[index]);
+		CombinationSumNoRepition(ans, output, index + 1, arr, target - arr[index]);
+
+		// exclusion of elements
+		output.pop_back();
+	}
+	CombinationSumNoRepition(ans, output, index + 1, arr, target);
 }
 
 void subsetString(vector<string> &ans, string output, int index, string str)
@@ -74,12 +138,11 @@ void subsetString(vector<string> &ans, string output, int index, string str)
 		ans.push_back(output);
 		return;
 	}
-	// exclusion of elements
 	subsetString(ans, output, index + 1, str);
-
 	// inclusion of elements
 	output.push_back(str[index]);
 	subsetString(ans, output, index + 1, str);
+	// automatic exclusion of last elements
 }
 
 void stringPermutation(vector<string> &ans, int index, string str)
@@ -98,25 +161,28 @@ void stringPermutation(vector<string> &ans, int index, string str)
 	}
 }
 
-void keypadCombinations(string digit, int index, string output, vector<string> mapping, vector<string> &collection){
-	if(index>=digit.length()){
+void keypadCombinations(string digit, int index, string output, vector<string> mapping, vector<string> &collection)
+{
+	if (index >= digit.length())
+	{
 		collection.push_back(output);
 		return;
 	}
 
-	int num=digit[index]-'0';
-	string val=mapping[num];
+	int num = digit[index] - '0';
+	string val = mapping[num];
 
 	for (int i = 0; i < val.length(); ++i)
 	{
 		output.push_back(val[i]);
-		keypadCombinations(digit, index+1, output, mapping, collection);
+		keypadCombinations(digit, index + 1, output, mapping, collection);
 		// backtracking
 		output.pop_back();
 	}
 }
 
-void inline printVectorString(vector<string> s){
+void inline printVectorString(vector<string> s)
+{
 	for (auto i : s)
 	{
 		for (auto j : i)
@@ -171,12 +237,12 @@ int main()
 
 	cout << endl;
 
-	cout<<"KeyPad Problem"<<endl;
-	vector<string> mapping{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-	test="34";
+	cout << "KeyPad Problem" << endl;
+	vector<string> mapping{"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+	test = "34";
 	vector<string> collection;
-	output2="";
-	keypadCombinations(test,0,output2,mapping,collection);
+	output2 = "";
+	keypadCombinations(test, 0, output2, mapping, collection);
 	printVectorString(collection);
 
 	return 0;

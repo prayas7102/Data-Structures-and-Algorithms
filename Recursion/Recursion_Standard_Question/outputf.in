@@ -6,22 +6,22 @@ iah_ayituk_inilahs = string reversed to = shalini_kutiya_hai
 10 is not a palindronme
 
 Following is the recursive combinations
-
-12 
-6 
-6 12 
-3 
-3 12 
-3 6 
-3 6 12 
-0 
-0 12 
-0 6 
-0 6 12 
-0 3 
-0 3 12 
-0 3 6 
 0 3 6 12 
+0 3 6 
+0 3 12 
+0 3 
+0 6 12 
+0 6 
+0 12 
+0 
+3 6 12 
+3 6 
+3 12 
+3 
+6 12 
+6 
+12 
+
 
 Following is the recursive combinations
 
