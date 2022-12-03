@@ -66,7 +66,7 @@ void arraySubset(vector<vector<int>> &ans, vector<int> output, int index, vector
 	arraySubset(ans, output, index + 1, num);
 }
 
-void subsetSum(vector<vector<int>> &ans, int sum, int index, vector<int> num)
+void subsetSum(vector<int> &ans, int sum, int index, vector<int> num)
 {
 	if (index >= num.size())
 	{
@@ -75,14 +75,14 @@ void subsetSum(vector<vector<int>> &ans, int sum, int index, vector<int> num)
 	}
 
 	// picking of elements
-	arraySubset(ans, sum + num[index], index + 1, num);
+	subsetSum(ans, sum + num[index], index + 1, num);
 
 	// not picking of elements
-	arraySubset(ans, sum, index + 1, num);
+	subsetSum(ans, sum, index + 1, num);
 }
 
 // leetcode https://leetcode.com/problems/combination-sum/
-// each element can be repeated.
+// each element can be repeated to sum up equal to the target variable.
 void CombinationSum(int index, vector<int> arr, vector<int> output, vector<vector<int>> &ans, int target)
 {
 	if (index >= arr.size())
@@ -99,12 +99,12 @@ void CombinationSum(int index, vector<int> arr, vector<int> output, vector<vecto
 		output.push_back(arr[index]);
 
 		// index remains same to preserve repetition
-		Combination(index, arr, output, ans, target - arr[index]);
+		CombinationSum(index, arr, output, ans, target - arr[index]);
 
 		output.pop_back();
 	}
 	// index is changed to get other elements
-	Combination(index + 1, arr, output, ans, target);
+	CombinationSum(index + 1, arr, output, ans, target);
 }
 
 // leetcode https://leetcode.com/problems/combination-sum-ii/
@@ -131,7 +131,7 @@ void CombinationSumNoRepition(vector<vector<int>> &ans, vector<int> output, int 
 	CombinationSumNoRepition(ans, output, index + 1, arr, target);
 }
 
-void subsetString(vector<string> &ans, string output, int index, string str)
+void subsetString(vector<string> ans, string output, int index, string str)
 {
 	if (index >= str.size())
 	{
@@ -244,6 +244,17 @@ int main()
 	output2 = "";
 	keypadCombinations(test, 0, output2, mapping, collection);
 	printVectorString(collection);
+	cout << endl;
+
+	vector<int> ans0;
+	int sum = 0;
+	cout << "Following is the subsetSum" << endl;
+	subsetSum(ans0, sum, 0, a);
+	for (auto i : ans0)
+	{
+		cout << i << " ";
+	}
+	cout << endl;
 
 	return 0;
 }

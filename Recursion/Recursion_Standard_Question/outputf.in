@@ -25,14 +25,6 @@ Following is the recursive combinations
 
 Following is the recursive combinations
 
-m 
-a 
-a m 
-r 
-r m 
-r a 
-r a m 
-
 Following is the recursive permutation
 r a m 
 r m a 
@@ -51,3 +43,6 @@ e i
 f g 
 f h 
 f i 
+
+Following is the subsetSum
+21 9 15 3 18 6 12 0 21 9 15 3 18 6 12 0 
