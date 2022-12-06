@@ -131,7 +131,7 @@ void CombinationSumNoRepition(vector<vector<int>> &ans, vector<int> output, int 
 	CombinationSumNoRepition(ans, output, index + 1, arr, target);
 }
 
-void subsetString(vector<string> ans, string output, int index, string str)
+void subsetString(vector<string> &ans, string output, int index, string str)
 {
 	if (index >= str.size())
 	{
@@ -181,6 +181,50 @@ void keypadCombinations(string digit, int index, string output, vector<string> m
 	}
 }
 
+void nQueen(int col, vector<string> &board, vector<vector<string>> &ans, vector<int> &left, vector<int> &upperDiag, vector<int> &lowerDiag, int n)
+{
+	if (col == n)
+	{
+		ans.push_back(board);
+		return;
+	}
+
+	for (int row = 0; row < n; row++)
+	{
+		if (!left[row] && !lowerDiag[row + col] && !upperDiag[n - 1 + col - row])
+		{
+			board[row][col] = 'Q';
+			left[row] = 1;
+			lowerDiag[row + col] = 1;
+			upperDiag[n - 1 + col - row] = 1;
+			nQueen(col + 1, board, ans, left, upperDiag, lowerDiag, n);
+			board[row][col] = '.';
+			left[row] = 0;
+			lowerDiag[row + col] = 0;
+			upperDiag[n - 1 + col - row] = 0;
+		}
+	}
+}
+
+void palindromePartition(int ind, vector<vector<string>> &ans, vector<string> &pal, string s)
+{
+	if (ind == s.length())
+	{
+		ans.push_back(pal);
+		return;
+	}
+	for (int i = ind; i < s.length(); ++i)
+	{
+
+		if (isPalindrome(s, ind, i))
+		{
+			pal.push_back(s.substr(ind, i - ind + 1));
+			palindromePartition(i + 1, ans, pal, s);
+			pal.pop_back();
+		}
+	}
+}
+
 void inline printVectorString(vector<string> s)
 {
 	for (auto i : s)
@@ -221,7 +265,7 @@ int main()
 
 	cout << endl;
 
-	string test = "ram";
+	string test = "amr";
 	string output2;
 	vector<string> answer2;
 	subsetString(answer2, output2, 0, test);
@@ -254,6 +298,20 @@ int main()
 	{
 		cout << i << " ";
 	}
+	cout << endl;
+
+	vector<vector<string>> ans1;
+	int n = 8;
+	string s(n, '.');
+	vector<string> board(n, s);
+	vector<int> left(n, 0), upperDiag(2 * n - 1, 0), lowerDiag(2 * n - 1, 0);
+	nQueen(0, board, ans1, left, upperDiag, lowerDiag, n);
+
+	cout << endl;
+
+	vector<vector<string>> ans;
+	vector<string> pal;
+	palindromePartition(0, ans, pal, s);
 	cout << endl;
 
 	return 0;

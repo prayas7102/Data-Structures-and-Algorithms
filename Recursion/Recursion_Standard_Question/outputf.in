@@ -25,13 +25,21 @@ Following is the recursive combinations
 
 Following is the recursive combinations
 
-Following is the recursive permutation
-r a m 
-r m a 
-a r m 
+r 
+m 
+m r 
+a 
+a r 
+a m 
 a m r 
+
+Following is the recursive permutation
+a m r 
+a r m 
 m a r 
 m r a 
+r m a 
+r a m 
 
 KeyPad Problem
 d g 
