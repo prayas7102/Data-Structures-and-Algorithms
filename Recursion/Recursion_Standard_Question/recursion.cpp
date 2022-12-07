@@ -80,7 +80,7 @@ void subsetSum(vector<int> &ans, int sum, int index, vector<int> num)
 	// not picking of elements
 	subsetSum(ans, sum, index + 1, num);
 }
-
+// int cou=INT_MAX;
 // leetcode https://leetcode.com/problems/combination-sum/
 // each element can be repeated to sum up equal to the target variable.
 void CombinationSum(int index, vector<int> arr, vector<int> output, vector<vector<int>> &ans, int target)
@@ -359,12 +359,36 @@ int main()
 	vector<string> board(n, s);
 	vector<int> left(n, 0), upperDiag(2 * n - 1, 0), lowerDiag(2 * n - 1, 0);
 	nQueen(0, board, ans1, left, upperDiag, lowerDiag, n);
-
 	cout << endl;
 
-	vector<vector<string>> ans;
+	cout << "Palindrome Partition for 23" << endl;
+	vector<vector<string>> ans00;
 	vector<string> pal;
-	palindromePartition(0, ans, pal, s);
+	string s = "aabb";
+	palindromePartition(0, ans00, pal, s);
+	for (auto a : ans00)
+	{
+		for (auto b : a)
+		{
+			cout << b << ", ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+	vector<int> v{5, 8, 10, 6};
+	vector<int> out;
+	vector<vector<int>> ans11;
+	cout << "CombinationSum for 23" << endl;
+	CombinationSum(0, v, out, ans11, 23);
+	for (auto a : ans11)
+	{
+		for (auto b : a)
+		{
+			cout << b << ", ";
+		}
+		cout << endl;
+	}
 	cout << endl;
 
 	return 0;

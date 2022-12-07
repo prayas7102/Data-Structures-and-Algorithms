@@ -1,7 +1,7 @@
 Position of 12 using binarySearch 3
 Position of 12 using binarySearch recursive 3
 
-iah_ayituk_inilahs = string reversed to = shalini_kutiya_hai
+dogsimar = string reversed to = ramisgod
 
 10 is not a palindronme
 
@@ -54,3 +54,15 @@ f i
 
 Following is the subsetSum
 21 9 15 3 18 6 12 0 21 9 15 3 18 6 12 0 
+
+Palindrome Partition for 23
+a, a, b, b, 
+a, a, bb, 
+aa, b, b, 
+aa, bb, 
+
+CombinationSum for 23
+5, 5, 5, 8, 
+5, 8, 10, 
+5, 6, 6, 6, 
+
