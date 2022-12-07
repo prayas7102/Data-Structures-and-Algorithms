@@ -225,6 +225,59 @@ void palindromePartition(int ind, vector<vector<string>> &ans, vector<string> &p
 	}
 }
 
+bool isValidSudoku(vector<vector<char>> &board)
+{
+	int row[9][9] = {0}, col[9][9] = {0}, grid_3x3[9][9] = {0};
+
+	for (int i = 0; i < board.size(); i++)
+		for (int j = 0; j < board[i].size(); j++)
+			if (board[i][j] != '.')
+			{
+				int num = board[i][j] - '1', k = i / 3 * 3 + j / 3;
+				if (row[i][num] || col[j][num] || grid_3x3[k][num])
+					return false;
+				row[i][num] = col[j][num] = grid_3x3[k][num] = 1;
+			}
+
+	return true;
+}
+
+bool isValid(vector<vector<char>> &board, int row, int col, char c)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		if (board[i][col] == c || board[row][i] == c || board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
+			return 0;
+	}
+	return 1;
+}
+
+bool solveSudoku(vector<vector<char>> &board)
+{
+	for (int i = 0; i < board.size(); i++)
+	{
+		for (int j = 0; j < board[0].size(); j++)
+		{
+			if (board[i][j] == '.')
+			{
+				for (char c = '1'; c <= '9'; c++)
+				{
+					if (isValid(board, i, j, c))
+					{
+						board[i][j] = c;
+						if (solve(board))
+							return 1;
+						else
+							board[i][j] = '.';
+					}
+				}
+				return 0;
+			}
+		}
+	}
+	return true;
+}
+
 void inline printVectorString(vector<string> s)
 {
 	for (auto i : s)
@@ -243,7 +296,7 @@ int main()
 	cout << "Position of " << num << " using binarySearch recursive " << binarySearchRecursive(a, num, 0, a.size()) << endl
 		 << endl;
 
-	string str = "shalini_kutiya_hai";
+	string str = "ramisgod";
 	str = reverseString(str, 0, str.size() - 1);
 	cout << str << " = string reversed to = " << reverseString(str, 0, str.size() - 1) << endl
 		 << endl;
