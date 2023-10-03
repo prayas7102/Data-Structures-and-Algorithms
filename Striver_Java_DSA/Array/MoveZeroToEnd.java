@@ -14,6 +14,7 @@ public class MoveZeroToEnd {
 				break;
 			}
 		}
+		// j is at first position of 0
 		for (int i = j + 1; i < array.length; i++) {
 			if (array[i] != 0) {
 				swap(array, i, j);

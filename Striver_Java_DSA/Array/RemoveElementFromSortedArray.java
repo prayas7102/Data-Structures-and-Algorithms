@@ -10,10 +10,7 @@ public class RemoveElementFromSortedArray {
 		for (var i = 0; i < arr.length; i++) {
 			s.add(arr[i]);
 		}
-		for (Integer ele : s) {
-			// System.out.print(ele);
-		}
-
+		
 		// O(n) complexity
 		int j = 0;
 		for (int i = 1; i < arr.length; i++) {
