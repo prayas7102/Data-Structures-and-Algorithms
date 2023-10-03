@@ -1,7 +1,11 @@
-public class UnionOfSortedArray {
+/**
+ * IntersectionOfSortedArray
+ */
+public class IntersectionOfSortedArray {
 	public static void main(String[] args) {
 		int arr1[] = { 1, 1, 2, 3, 4, 5 };
 		int arr2[] = { 2, 3, 4, 4, 5, 6 };
+		// anser should be sorted intersection of above arrays
 		int p1 = 0;
 		int p2 = 0;
 		int n = arr1.length;
@@ -10,42 +14,24 @@ public class UnionOfSortedArray {
 		// last no. entered into array to filter identical no.
 		int last = -1, i = 0;
 		while (p1 < n && p2 < m) {
-			if (arr1[p1] >= arr2[p2]) {
+			if (arr1[p1] > arr2[p2]) {
+				p2++;
+			} else if (arr1[p1] < arr2[p2]) {
+				p1++;
+			} else if (arr1[p1] == arr2[p2]) {
 				// checking if last ele is same as arr2[p2]
-				if (last == arr2[p2]) {
+				int equalElement = arr2[p2];
+				if (last == equalElement) {
 					p2++;
 					continue;
 				}
-				last = arr2[p2];
+				last = equalElement;
 				arr3[i] = last;
 				p2++;
-			} else {
-				// checking if last ele is same as arr1[p1]
-				if (last == arr1[p1]) {
-					p1++;
-					continue;
-				}
-				last = arr1[p1];
-				arr3[i] = last;
-				p1++;
-			}
-			i++;
-		}
-		// to cover left over ele if any in arr1
-		if (p1 < n) {
-			while (p1 < n) {
-				arr3[i] = arr1[p1];
 				p1++;
 				i++;
 			}
-		}
-		// to cover left over ele if any in arr2
-		if (p2 < m) {
-			while (p2 < m) {
-				arr3[i] = arr2[p2];
-				p2++;
-				i++;
-			}
+
 		}
 		// print final arrays
 		for (int k = 0; k < n + m; k++) {
